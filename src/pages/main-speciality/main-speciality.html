@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            {{title}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-searchbar placeholder="Search speciality" type='text' animated=true (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list>
+        <ion-item *ngFor="let item of items" (click)="itemclick(item)">
+            {{ item.name }}
+            <button ion-button clear item-end> <ion-icon name="ios-arrow-forward"></ion-icon></button>
+        </ion-item>
+        <p *ngIf="noresult">No result found</p>
+    </ion-list>
+</ion-content>

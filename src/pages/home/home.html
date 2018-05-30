@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <h5>Discuss help learn Grow</h5>
+    <h6>Welcome Doctor</h6>
+    <p>Please enter your mobile number and get register</p>
+    <form [formGroup]="register" (ngSubmit)="logForm()">
+        <ion-item>
+            <ion-label floating>Mobile Number</ion-label>
+            <ion-input type="number" formControlName="Mobile"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!register.controls['Mobile'].valid && register.controls['Mobile'].touched">Please Enter a mobile number</div>
+        </div>
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button [disabled]="!register.valid" icon-right>
+                Register
+            <ion-icon name="log-in"></ion-icon>
+          </button>
+        </div>
+    </form>
+</ion-content>

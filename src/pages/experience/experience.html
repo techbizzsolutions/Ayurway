@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="applicant">
+        <ion-item>
+            <ion-label floating>Enter Designation</ion-label>
+            <ion-input type="text" formControlName="Designation"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Designation'].valid && applicant.controls['Designation'].touched">Enter Designation Name</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Enter Hospital</ion-label>
+            <ion-input type="text" formControlName="Hospital"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Hospital'].valid && applicant.controls['Hospital'].touched">Enter Hospital</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Enter city</ion-label>
+            <ion-input type="text" formControlName="city"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['city'].valid && applicant.controls['city'].touched">Enter city</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Enter country</ion-label>
+            <ion-input type="text" formControlName="country"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['country'].valid && applicant.controls['country'].touched">Enter country</div>
+        </div>
+        <ion-row>
+            <ion-col col-6>
+                <ion-item (click)="opencal('From')">
+                    <ion-label class="marginlbl">{{ From }}</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col col-6>
+                <ion-item (click)="opencal('To')">
+                    <ion-label class="marginlbl">{{ To }}</ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-item *ngFor="let item of subSpeciality;">
+            <ion-checkbox [(ngModel)]="item.selected" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+            <ion-label>{{item.title}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-textarea placeholder="Enter description" rows="4" formControlName="Detail"></ion-textarea>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Detail'].valid && applicant.controls['Detail'].touched">Enter Description</div>
+        </div>
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
+                        Next
+                     <ion-icon name="md-arrow-round-forward"></ion-icon>
+            </button>
+        </div>
+    </form>
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="applicant">
+        <ion-item>
+            <ion-label floating>Presentation title</ion-label>
+            <ion-input type="text" formControlName="Presentation"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Presentation'].valid && applicant.controls['Presentation'].touched">Enter Presentation title</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Enter link</ion-label>
+            <ion-input type="text" formControlName="link"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['link'].valid && applicant.controls['link'].touched">Enter link </div>
+        </div>
+        <ion-item>
+            <ion-textarea placeholder="Enter description" rows="4" formControlName="Detail"></ion-textarea>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Detail'].valid && applicant.controls['Detail'].touched">Enter Description</div>
+        </div>
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
+                        Next
+                     <ion-icon name="md-arrow-round-forward"></ion-icon>
+            </button>
+        </div>
+    </form>
+</ion-content>

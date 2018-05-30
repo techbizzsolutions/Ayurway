@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="applicant">
+        <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" formControlName="Name"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Name'].valid && applicant.controls['Name'].touched">Enter Award Name</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Location</ion-label>
+            <ion-input type="text" formControlName="Location"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Location'].valid && applicant.controls['Location'].touched">Enter Location</div>
+        </div>
+        <ion-item (click)="opencal()">
+            <ion-label>When attended <span style="float: right;"> {{ dobdate }}</span></ion-label>
+        </ion-item>
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
+                        Next
+                     <ion-icon name="md-arrow-round-forward"></ion-icon>
+            </button>
+        </div>
+    </form>
+</ion-content>

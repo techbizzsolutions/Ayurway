@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <form [formGroup]="applicant">
+        <ion-row>
+            <ion-col col-1>
+                <ion-label class="marginlbl">Dr.</ion-label>
+            </ion-col>
+            <ion-col col-6>
+                <ion-item>
+                    <ion-input type="text" placeholder="First Name" formControlName="First"></ion-input>
+                </ion-item>
+                <div padding-horizontal>
+                    <div class="alert" *ngIf="!applicant.controls['First'].valid && applicant.controls['First'].touched">Enter First Name</div>
+                </div>
+            </ion-col>
+            <ion-col col-5>
+                <ion-item>
+                    <ion-input type="text" placeholder="Last Name" formControlName="Last"></ion-input>
+                </ion-item>
+                <div padding-horizontal>
+                    <div class="alert" *ngIf="!applicant.controls['Last'].valid && applicant.controls['Last'].touched">Enter Last Name</div>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <ion-item>
+                    <ion-label floating>Enter City</ion-label>
+                    <ion-input type="text" formControlName="City"></ion-input>
+                </ion-item>
+                <div padding-horizontal>
+                    <div class="alert" *ngIf="!applicant.controls['City'].valid && applicant.controls['City'].touched">Enter City </div>
+                </div>
+            </ion-col>
+        </ion-row>
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
+                    Next
+                 <ion-icon name="md-arrow-round-forward"></ion-icon>
+        </button>
+        </div>
+    </form>
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="applicant">
+        <ion-item>
+            <ion-label floating>Paper name</ion-label>
+            <ion-input type="text" formControlName="Paper"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Paper'].valid && applicant.controls['Paper'].touched">Enter Paper Name</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Journal name, volume and pages</ion-label>
+            <ion-input type="text" formControlName="Journal"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Journal'].valid && applicant.controls['Journal'].touched">Enter Journal name, volume and pages</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Enter Authors</ion-label>
+            <ion-input type="text" formControlName="Author"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Author'].valid && applicant.controls['Author'].touched">Enter Author</div>
+        </div>
+        <ion-item>
+            <ion-label floating>Enter link</ion-label>
+            <ion-input type="text" formControlName="link"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['link'].valid && applicant.controls['link'].touched">Enter link</div>
+        </div>
+
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
+                        Next
+                     <ion-icon name="md-arrow-round-forward"></ion-icon>
+            </button>
+        </div>
+    </form>
+</ion-content>
