@@ -19,5 +19,8 @@ export class TabsHomePage {
  
   onTabSelect(ev: any) {
     }
-  
+    notification()
+    {
+      this.navCtrl.push('NotificationsPage');
+    }
 }

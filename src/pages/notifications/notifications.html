@@ -1,0 +1,42 @@
+<ion-header>
+
+    <ion-navbar color="primary">
+        <ion-title>Notifications</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item-sliding (click)="itemClick()">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="assets/imgs/ic_profile_dp1.jpg">
+                </ion-avatar>
+                <h2>Dr. Raj kumar</h2>
+                <p>My Neighbor Totoro</p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="primary">
+              <ion-icon name="md-trash"></ion-icon>
+              Delete
+            </button>
+            </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding (click)="itemClick()">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="assets/imgs/ic_profile_dp1.jpg">
+                </ion-avatar>
+                <h2>Dr. Raj kumar</h2>
+                <p>My Neighbor Totoro</p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="primary">
+              <ion-icon name="md-trash"></ion-icon>
+              Delete
+            </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>
