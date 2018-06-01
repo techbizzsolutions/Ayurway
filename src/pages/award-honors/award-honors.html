@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content padding>
+    <h5> Awards and Honors </h5>
     <form [formGroup]="applicant">
         <ion-item>
             <ion-label floating>Award Name</ion-label>
@@ -24,8 +25,7 @@
         <!-- Float the icon right -->
         <div class="button_div">
             <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
-                        Next
-                     <ion-icon name="md-arrow-round-forward"></ion-icon>
+                    Save
             </button>
         </div>
     </form>

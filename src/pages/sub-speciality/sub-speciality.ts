@@ -26,8 +26,20 @@ export class SubSpecialityPage {
 
   done()
   {
-    this.navCtrl.push('AwardHonorsPage');
+    var check = false;
+    var arry = [];
+    this.subSpeciality.forEach(element => {
+        if(element.selected)
+        {
+          check = true;
+          arry.push(element.title);
+        }
 
+    });
+    let user = JSON.parse(localStorage.getItem('user')) ;
+    user.subspeciality = arry;
+    localStorage.setItem('user', JSON.stringify(user));
+    this.navCtrl.push('PersonalDetailsPage');
   }
 
   ionViewDidLoad() {

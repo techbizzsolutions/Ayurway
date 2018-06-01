@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController,Events, NavParams,ActionSheetController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SmsServiceProvider } from '../../providers/sms-service/sms-service';
+import { NgZone } from '@angular/core';
 
 @IonicPage()
 @Component({
@@ -19,6 +20,9 @@ export class ExperiencePage {
     }];
   constructor(public navCtrl: NavController,
     public formBuilder: FormBuilder,
+    public events: Events,
+    public ngZone: NgZone,
+    public actionSheetCtrl: ActionSheetController,
     public smsServiceProvider: SmsServiceProvider,
      public navParams: NavParams) {
       this.applicant = this.formBuilder.group({
@@ -53,12 +57,14 @@ export class ExperiencePage {
         }
      });
   }
+  
 
   applicantForm()
   {
-    this.navCtrl.push('EducationPage');
+    this.events.publish('user:profile');
+    this.navCtrl.pop();
   }
-
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ExperiencePage');
   }

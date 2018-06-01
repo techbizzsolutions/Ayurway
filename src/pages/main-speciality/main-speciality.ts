@@ -56,6 +56,9 @@ export class MainSpecialityPage {
   itemclick(item:any)
   {
     console.log(item);
+    let user = JSON.parse(localStorage.getItem('user')) ;
+    user.mainspeciality = item.name;
+    localStorage.setItem('user', JSON.stringify(user));
     this.navCtrl.push('SubSpecialityPage',item);
   }
 

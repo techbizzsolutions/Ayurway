@@ -6,7 +6,252 @@
     </ion-navbar>
 </ion-header>
 
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            <ion-item *ngIf="user">
+                <ion-thumbnail item-start>
+                    <div class="outerdiv" (click)="changePic()">
+                        <div class="setclircle">
+                            <i class="smallimg"></i>
+                            <img class="bigimg" [src]='profilePic'>
+                        </div>
+                    </div>
+                </ion-thumbnail>
+                <h2 (click)="itemclick('personal')"> Dr. <strong>{{user.personaldetails.First}} </strong><strong>{{user.personaldetails.Last}} </strong>
+                    <span> 
+                                <ion-icon color="primary" name="md-create"></ion-icon>
+                           </span></h2>
+                <p>{{user.iam}}</p>
+                <p>{{user.personaldetails.City}}</p>
+            </ion-item>
+            <progress-bar *ngIf="showBar" [progress]="loadProgress"></progress-bar>
+        </ion-card-content>
 
-<ion-content padding>
+    </ion-card>
+
+    <hr>
+
+    <ion-row class="socialinfo">
+        <ion-col col-3>
+            <div>
+                <p>128</p>
+                <p>Followers</p>
+            </div>
+        </ion-col>
+        <ion-col col-3>
+            <div>
+                <p>18</p>
+                <p>Followings</p>
+            </div>
+        </ion-col>
+        <ion-col col-3>
+            <div>
+                <p>12</p>
+                <p>Cases</p>
+            </div>
+        </ion-col>
+        <ion-col col-3>
+            <div>
+                <p>28</p>
+                <p>Answers</p>
+            </div>
+        </ion-col>
+    </ion-row>
+
+    <hr>
+    <ion-card>
+        <ion-card-content>
+            <ion-list *ngIf="user">
+                <ion-item-divider color="light" class="dividerpadding">
+                    <h6>Basic Info </h6>
+                </ion-item-divider>
+                <ion-item (click)="itemclick('Phone')">
+                    <h6>Phone </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">{{user.Mobile}}</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+                <ion-item (click)="itemclick('personal')">
+                    <h6>Email </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">{{user.personaldetails.Email}}</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+                <ion-item (click)="itemclick('personal')">
+                    <h6>Summary </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p style="white-space: normal !important;" class="title">{{user.personaldetails.Summary}}</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+                <ion-item (click)="itemclick('Membership')">
+                    <h6>Membership </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">ABC</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Membership</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Experience')">
+                    <h6>Experience </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">ABC Hospital</p>
+                            <p class="subtitle">Doctor</p>
+                            <p class="subtitle">11-12-2001 to 10-12-2016</p>
+                            <p class="subtitle">Meerut india</p>
+                            <p style="white-space: normal !important;" class="subtitle"> Soloved cases</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Experience</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Education')">
+                    <h6>Education </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">ABC institute</p>
+                            <p class="subtitle">MCA</p>
+                            <p class="subtitle">11-12-2001 to 10-12-2016</p>
+                            <p class="subtitle">Meerut india</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Education</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Awards')">
+                    <h6>Awards & Honors </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">ABC Award</p>
+                            <p style="white-space: normal !important;" class="subtitle">Best performer</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Awards & Honors</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Publication')">
+                    <h6>Publication </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">ABC name</p>
+                            <p class="subtitle">1234</p>
+                            <p class="subtitle">ajay</p>
+                            <p class="subtitle">N/A</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Publication</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Presentation')">
+                    <h6>Presentation </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">Nirpha</p>
+                            <p style="white-space: normal !important;" class="subtitle">how to hanlde serious cases</p>
+                            <p class="subtitle">N/A</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Presentation</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Volunteer')">
+                    <h6>Volunteer Experience </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">Nirpha</p>
+                            <p class="subtitle">Meerut</p>
+                            <p class="subtitle">12-12-2001</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Volunteer Experience</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Certification')">
+                    <h6>Certification & Courses </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">MBBS</p>
+                            <p class="subtitle">shobhit university Meerut</p>
+                            <p class="subtitle">12-12-2001 to 11-12-2012</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Certification & Courses</p>
+                </ion-item>
+                <ion-item (click)="itemclick('CME')">
+                    <h6>CME's </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">ABC</p>
+                            <p class="subtitle">Meerut</p>
+                            <p class="subtitle">21-11-2001</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add CME's</p>
+                </ion-item>
+                <ion-item (click)="itemclick('Language')">
+                    <h6>Language </h6>
+                    <ion-row>
+                        <ion-col col-11>
+                            <p class="title">English</p>
+                        </ion-col>
+                        <ion-col col-1>
+                            <ion-icon color="primary" name="md-create"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                    <p class="title">
+                        <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Language</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+
 
 </ion-content>

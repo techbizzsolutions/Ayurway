@@ -23,8 +23,8 @@
 }
 
 h5 {
-    margin-top: 20px !important;
-    margin-bottom: 15px!important;
+    margin-top: 5px !important;
+    margin-bottom: 10px!important;
     text-align: center!important;
     color: color($colors, primary) !important;
 }
@@ -43,4 +43,53 @@ h5 {
 
 .dividerpadding {
     padding-left: 15px !important;
+}
+
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: color($colors, secondary) !important;
+    -webkit-box-shadow: inset 0 -1px 0 0 color($colors, secondary) !important;
+    box-shadow: inset 0 -1px 0 0 color($colors, secondary) !important
+}
+
+.iconmargin {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.profile-data {
+    margin: 0px;
+    text-align: center;
+    background-color: color($colors, primary) !important;
+    .outerdiv {
+        text-align: -webkit-center;
+        .setclircle {
+            //background-image: url('../assets/imgs/profile_dp_outline.png');
+            background-size: cover;
+            text-align: center;
+            width: 96px;
+            height: 96px;
+            .bigimg {
+                border-radius: 42px;
+                width: 85px;
+                height: 85px;
+                margin-top: 6px;
+            }
+        }
+    }
+    h2 {
+        margin-top: 0.8rem !important;
+        margin-bottom: 05px !important;
+        font-size: 1.8rem;
+        color: white !important;
+        white-space: normal !important;
+    }
+    p {
+        color: white;
+        margin: 1px 1px 15px 0px !important;
+    }
+}
+
+.select-popover ion-list {
+    margin: -1px 1px 1px 10px !important;
 }

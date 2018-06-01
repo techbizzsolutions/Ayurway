@@ -1,12 +1,102 @@
-<ion-header>
-    <ion-navbar color="primary">
-        <ion-title>
-            Ayurway
-        </ion-title>
-    </ion-navbar>
-</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label>Speciality</ion-label>
+                <ion-select interface="popover" [(ngModel)]="region">
+                    <ion-option *ngFor="let item of items" [value]="item.name">{{item.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-start>
+                <ion-icon color="primary" style="font-size: 3.2em!important;" name="md-add-circle"></ion-icon>
+            </ion-avatar>
+            Share your case
+        </ion-item>
+    </ion-card>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/ic_profile_dp1.jpg">
+            </ion-avatar>
+            <h2>Marty McFly</h2>
+            <p>November 5, 1955</p>
+            <button ion-button item-end icon-left>
+                <ion-icon name="md-person-add"></ion-icon>
+                Follow
+            </button>
+        </ion-item>
+        <img src="assets/imgs/dummy.jpg">
 
+        <ion-card-content>
+            <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        </ion-card-content>
 
-<ion-content padding>
+        <ion-row>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+                </button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Answers</div>
+                </button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                <ion-icon name="md-share"></ion-icon>
+                <div>4 Shares</div>
+                </button>
+            </ion-col>
+        </ion-row>
 
+    </ion-card>
+    <ion-card>
+
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/ic_profile_dp1.jpg">
+            </ion-avatar>
+            <h2>Marty McFly</h2>
+            <p>November 5, 1955</p>
+            <button ion-button item-end icon-left>
+    <ion-icon name="md-person-add"></ion-icon>
+    Follow
+  </button>
+        </ion-item>
+
+        <img src="assets/imgs/dummy.jpg">
+
+        <ion-card-content>
+            <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>12 Likes</div>
+                    </button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>4 Answers</div>
+                    </button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="md-share"></ion-icon>
+                    <div>4 Shares</div>
+                    </button>
+            </ion-col>
+        </ion-row>
+
+    </ion-card>
 </ion-content>

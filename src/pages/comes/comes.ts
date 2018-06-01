@@ -23,7 +23,7 @@ export class ComesPage {
 
   applicantForm()
   {
-    this.navCtrl.push('EducationPage');
+    this.navCtrl.pop();
   }
 
   opencal(type)

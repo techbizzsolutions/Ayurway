@@ -11,6 +11,12 @@ import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { SmsServiceProvider } from '../providers/sms-service/sms-service';
 import { SMS } from '@ionic-native/sms';
 import { DatePicker } from '@ionic-native/date-picker';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { LoaderServiceProvider } from '../providers/loader-service/loader-service';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { SuperTabsModule } from 'ionic2-super-tabs';
 
 @NgModule({
   declarations: [
@@ -21,6 +27,7 @@ import { DatePicker } from '@ionic-native/date-picker';
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    SuperTabsModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -34,8 +41,13 @@ import { DatePicker } from '@ionic-native/date-picker';
     OpenNativeSettings,
     SMS,
     DatePicker,
+    SocialSharing,
+    FileTransfer,
+    Camera,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SmsServiceProvider
+    SmsServiceProvider,
+    LoaderServiceProvider
   ]
 })
 export class AppModule {}

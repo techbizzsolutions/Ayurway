@@ -1,3 +1,65 @@
 page-profile {
-
+    .card-content-md {
+        padding: 5px 5px !important;
+    }
+    item-md ion-avatar[item-left],
+    .item-md ion-thumbnail[item-left],
+    .item-md ion-avatar[item-start],
+    .item-md ion-thumbnail[item-start] {
+        margin: 8px 16px 8px 5px !important;
+    }
+    h2 {
+        span {
+            margin-left: 10px;
+        }
+    }
+    h6 {
+        color: color($colors, primary) !important;
+        padding-top: 3px !important;
+        span {
+            float: right !important;
+        }
+    }
+    .title {
+        font-size: 1.3rem!important;
+        color: #273443!important;
+    }
+    .subtitle {
+        font-size: 1.2rem!important;
+    }
+    .socialinfo {
+        background-color: color($colors, primary) !important;
+        ;
+        div {
+            text-align: center;
+            p {
+                margin: 5px !important;
+                color: white !important;
+            }
+        }
+        ion-col {
+            border-right: 1px solid white;
+        }
+    }
+    .outerdiv {
+        text-align: -webkit-center;
+        .setclircle {
+            .bigimg {
+                margin-top: -40px;
+                width: 80px;
+                height: 80px;
+                border-radius: 50px;
+                z-index: 1;
+            }
+            .smallimg {
+                content: url("../assets/imgs/smalledit.png");
+                width: 26px;
+                height: 26px;
+                z-index: 2;
+                margin-top: 15px;
+                margin-left: 75px;
+                position: relative;
+            }
+        }
+    }
 }

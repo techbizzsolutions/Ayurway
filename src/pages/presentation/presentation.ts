@@ -22,7 +22,7 @@ export class PresentationPage {
 
   applicantForm()
   {
-    this.navCtrl.push('PublicationsPage');
+    this.navCtrl.pop();
   }
 
   ionViewDidLoad() {

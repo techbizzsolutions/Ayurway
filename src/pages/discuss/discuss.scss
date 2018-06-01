@@ -1,3 +1,11 @@
 page-discuss {
-
+    .card-content-md {
+        padding: 5px 5px !important;
+    }
+    item-md ion-avatar[item-left],
+    .item-md ion-thumbnail[item-left],
+    .item-md ion-avatar[item-start],
+    .item-md ion-thumbnail[item-start] {
+        margin: 8px 16px 8px 5px !important;
+    }
 }

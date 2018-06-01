@@ -7,6 +7,8 @@
 </ion-header>
 <ion-content padding>
     <form [formGroup]="applicant">
+        <h5> Personal Details </h5>
+
         <ion-row>
             <ion-col col-1>
                 <ion-label class="marginlbl">Dr.</ion-label>
@@ -28,22 +30,30 @@
                 </div>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col col-12>
-                <ion-item>
-                    <ion-label floating>Enter City</ion-label>
-                    <ion-input type="text" formControlName="City"></ion-input>
-                </ion-item>
-                <div padding-horizontal>
-                    <div class="alert" *ngIf="!applicant.controls['City'].valid && applicant.controls['City'].touched">Enter City </div>
-                </div>
-            </ion-col>
-        </ion-row>
+        <ion-item>
+            <ion-label floating>Enter Email</ion-label>
+            <ion-input type="text" formControlName="Email"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Email'].valid && applicant.controls['Email'].touched">Enter Email </div>
+        </div>
+        <ion-item>
+            <ion-label floating>Enter City</ion-label>
+            <ion-input type="text" formControlName="City"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['City'].valid && applicant.controls['City'].touched">Enter City </div>
+        </div>
+        <ion-item>
+            <ion-textarea placeholder="Enter Summary" rows="4" formControlName="Summary"></ion-textarea>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Summary'].valid && applicant.controls['Summary'].touched">Enter Summary</div>
+        </div>
         <!-- Float the icon right -->
         <div class="button_div">
             <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
-                    Next
-                 <ion-icon name="md-arrow-round-forward"></ion-icon>
+                    Save
         </button>
         </div>
     </form>

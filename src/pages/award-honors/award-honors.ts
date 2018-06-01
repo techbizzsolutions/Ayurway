@@ -24,6 +24,6 @@ export class AwardHonorsPage {
 
   applicantForm()
   {
-    this.navCtrl.push('CertificationAndCoursesPage');
+    this.navCtrl.pop();
   }
 }

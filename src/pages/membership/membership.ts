@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the MembershipPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -15,9 +9,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MembershipPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  applicant : FormGroup;
+  constructor(public navCtrl: NavController,
+    public formBuilder: FormBuilder,
+     public navParams: NavParams) {
+      this.applicant = this.formBuilder.group({
+        Name: ['', Validators.required]
+      });
   }
 
+  applicantForm()
+  {
+    this.navCtrl.pop();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MembershipPage');
   }

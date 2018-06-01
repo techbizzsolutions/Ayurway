@@ -31,7 +31,7 @@ export class EducationPage {
 
   applicantForm()
   {
-    this.navCtrl.push('PresentationPage');
+    this.navCtrl.pop();
   }
 
   opencal(type)

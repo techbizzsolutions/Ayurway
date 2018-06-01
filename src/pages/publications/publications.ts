@@ -24,7 +24,7 @@ export class PublicationsPage {
 
   applicantForm()
   {
-    this.navCtrl.push('VolunteerExperiencePage');
+    this.navCtrl.pop();
   }
 
   ionViewDidLoad() {

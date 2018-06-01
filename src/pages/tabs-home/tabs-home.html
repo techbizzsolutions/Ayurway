@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <button ion-button menuToggle>
+        <img src='assets/imgs/slide-menu-icon.png' style="max-width: 60%;">
+      </button>
+        <ion-title>
+            Ayurway
+        </ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <super-tabs tabsPlacement="top" toolbarBackground="primary" toolbarColor="light" [config]="{ sideMenu: 'left' }" indicatorColor="light" (tabSelect)="onTabSelect($event)">
+        <super-tab *ngFor="let page of pages" [title]="page.title" [root]="page.pageName" [id]="page.id"></super-tab>
+    </super-tabs>
+
+</ion-content>

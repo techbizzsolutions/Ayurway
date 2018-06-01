@@ -1,1 +1,23 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content" id="menu1">
+    <ion-content>
+        <ion-list class="profile-data">
+            <ion-col>
+                <div class="outerdiv" menuClose (click)="openPage(pages[1])">
+                    <div class="setclircle">
+                        <img class="bigimg" [src]='profilepic'>
+                    </div>
+                </div>
+                <h2>{{UserFname}}</h2>
+                <p>{{UserLname}}</p>
+            </ion-col>
+        </ion-list>
+        <ion-list>
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                    <ion-icon [name]="p.icon" class="iconmargin"></ion-icon>
+                    {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

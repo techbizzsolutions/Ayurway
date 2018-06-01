@@ -5,8 +5,22 @@
         </ion-title>
     </ion-navbar>
 </ion-header>
-
-
 <ion-content padding>
+    <h5> Language </h5>
 
+    <form [formGroup]="applicant">
+        <ion-item>
+            <ion-label floating>Enter language name</ion-label>
+            <ion-input type="text" formControlName="Name"></ion-input>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Name'].valid && applicant.controls['Name'].touched">Enter language name</div>
+        </div>
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
+        Save
+      </button>
+        </div>
+    </form>
 </ion-content>

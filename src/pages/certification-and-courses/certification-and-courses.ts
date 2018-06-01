@@ -53,7 +53,7 @@ export class CertificationAndCoursesPage {
 
   applicantForm()
   {
-    this.navCtrl.push('ComesPage');
+    this.navCtrl.pop();
   }
 
   ionViewDidLoad() {
