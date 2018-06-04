@@ -8,6 +8,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { File } from '@ionic-native/file';
 import { NgZone } from '@angular/core';
 import { HomePage } from '../home/home';
+import { ImageSelectorProvider } from '../../providers/image-selector/image-selector';
 
 @IonicPage()
 @Component({
@@ -24,6 +25,7 @@ export class ProfilePage {
     private loader: LoaderServiceProvider,
     private camera: Camera,
     public ngZone: NgZone,
+    public imgselect:ImageSelectorProvider,
     private domSanitizer: DomSanitizer,
     private transfer: FileTransfer,
     private file: File,
@@ -51,19 +53,29 @@ export class ProfilePage {
         {
           text: 'Load from Library',
           handler: () => {
-            this.selectPhoto();
+            this.imgselect.selectPhoto().then(image=>{
+              console.log('selectPhoto res',image);
+              if(image)
+              {
+                   this.checkPicSize(image);
+              }
+          }).catch (err=>{
+            console.log(err);
+          });
           }
         },
         {
           text: 'Use Camera',
           handler: () => {
-            this.takePhoto();
-          }
-        },
-        {
-          text: 'Remove Photo',
-          handler: () => {
-            this.removePhoto();
+            this.imgselect.takePhoto().then(image=>{
+              console.log('takePhoto res',image);
+              if(image)
+             {
+              this.checkPicSize(image);
+            }
+          }).catch (err=>{
+            console.log(err);
+          });
           }
         },
         {
@@ -73,43 +85,6 @@ export class ProfilePage {
       ]
     });
     actionSheet.present();
-  }
-
-  removePhoto() {
-
-  }
-
-  takePhoto() {
-    this.camera.getPicture({
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      encodingType: this.camera.EncodingType.JPEG,
-      correctOrientation: true,
-      quality: 30,
-      allowEdit: true,
-      saveToPhotoAlbum: true
-    }).then(imageData => {
-      this.profilePic = this.domSanitizer.bypassSecurityTrustResourceUrl(imageData);
-      this.checkPicSize(imageData);
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  selectPhoto(): void {
-    this.camera.getPicture({
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      allowEdit: true,
-      correctOrientation: true,
-      quality: 30,
-      encodingType: this.camera.EncodingType.JPEG,
-    }).then(imageData => {
-      this.profilePic = this.domSanitizer.bypassSecurityTrustResourceUrl(imageData);
-      this.checkPicSize(imageData);
-    }, error => {
-      console.log(error);
-    });
   }
 
   checkPicSize(imageURI: any) {

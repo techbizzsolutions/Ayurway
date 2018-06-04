@@ -17,6 +17,7 @@ import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { SuperTabsModule } from 'ionic2-super-tabs';
+import { ImageSelectorProvider } from '../providers/image-selector/image-selector';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
     File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SmsServiceProvider,
-    LoaderServiceProvider
+    LoaderServiceProvider,
+    ImageSelectorProvider
   ]
 })
 export class AppModule {}

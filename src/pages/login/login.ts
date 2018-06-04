@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {IonicPage, NavController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { HomePage } from '../home/home';
 
+@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-login',
+  templateUrl: 'login.html',
 })
-export class HomePage {
+export class LoginPage {
+
   private register : FormGroup;
   user:any;
   constructor(
@@ -30,13 +33,13 @@ export class HomePage {
 
   logForm()
   {
-    console.log('click');
       localStorage.setItem('user', JSON.stringify(this.register.value));
-      this.navCtrl.push('OtpPage','register');
+      this.navCtrl.push('OtpPage','login');
   }
 
   login()
   {
-    this.navCtrl.setRoot('LoginPage');
+    this.navCtrl.setRoot(HomePage);
   }
 }
+

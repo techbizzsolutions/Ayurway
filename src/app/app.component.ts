@@ -41,7 +41,7 @@ export class MyApp {
       // used for an example of ngFor and navigation
       this.pages = [{
           title: 'Home',
-          component: 'DiscussPage',
+          component: 'TabsHomePage',
           icon: 'ios-home'
         },
         {

@@ -9,6 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TabsHomePage {
 
   pages = [
+    { pageName: 'ShareHomePage', title: 'Home', id: 'ShareHomeTab'},
     { pageName: 'DiscussPage', title: 'Discuss', id: 'DiscussTab'},
     { pageName: 'NewsPage', title: 'News', id: 'NewsTab'},
     { pageName: 'JobsPage', title: 'Jobs', id: 'JobsTab'},
@@ -22,5 +23,10 @@ export class TabsHomePage {
     notification()
     {
       this.navCtrl.push('NotificationsPage');
+    }
+
+    search()
+    {
+      this.navCtrl.push('SearchPage');
     }
 }

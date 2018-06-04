@@ -3,10 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-discuss',
-  templateUrl: 'discuss.html',
+  selector: 'page-share-home',
+  templateUrl: 'share-home.html',
 })
-export class DiscussPage {
+export class ShareHomePage {
+
   rootNavCtrl: NavController;
   region:any;
   tab:any = 'Discus';
@@ -36,21 +37,15 @@ export class DiscussPage {
 
   otherProfile()
   {
-     this.rootNavCtrl.push('OtherProfilePage');
-
+    this.rootNavCtrl.push('OtherProfilePage');
   }
-
+  
   share()
   {
     console.log('share DiscussPage');
   }
-  
   ionViewDidLoad() {
     console.log('ionViewDidLoad DiscussPage');
   }
 
-  shareCase()
-  {
-    this.rootNavCtrl.push('ShareCasePage');
-  }
 }

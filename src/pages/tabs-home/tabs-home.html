@@ -10,6 +10,9 @@
             Ayurway
         </ion-title>
         <ion-buttons end>
+            <button ion-button icon-only (click)="search()">
+                        <ion-icon name="md-search"></ion-icon>
+                      </button>
             <button ion-button icon-only (click)="notification()">
                           <ion-icon name="md-notifications"></ion-icon>
                         </button>
@@ -19,7 +22,7 @@
 
 <ion-content>
 
-    <super-tabs tabsPlacement="top" toolbarBackground="primary" toolbarColor="light" [config]="{ sideMenu: 'left' }" indicatorColor="light" (tabSelect)="onTabSelect($event)">
+    <super-tabs tabsPlacement="top" scrollTabs=true toolbarBackground="primary" toolbarColor="light" [config]="{ sideMenu: 'left' }" indicatorColor="light" (tabSelect)="onTabSelect($event)">
         <super-tab *ngFor="let page of pages" [title]="page.title" [root]="page.pageName" [id]="page.id"></super-tab>
     </super-tabs>
 

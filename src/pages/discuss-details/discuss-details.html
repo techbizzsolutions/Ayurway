@@ -6,6 +6,69 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-start (click)="otherProfile()">
+                <img src="assets/imgs/ic_profile_dp1.jpg">
+            </ion-avatar>
+            <div (click)="otherProfile()">
+                <h2>Marty McFly</h2>
+                <p>November 5, 1955</p>
+            </div>
 
+            <button ion-button item-end icon-left>
+                    <ion-icon name="md-person-add"></ion-icon>
+                    Follow
+                </button>
+        </ion-item>
+        <div>
+            <img src="assets/imgs/dummy.jpg">
+
+            <ion-card-content>
+                <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+            </ion-card-content>
+        </div>
+        <ion-row>
+            <ion-col col-6 class="aligncenter">
+                <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>12 Likes</div>
+                    </button>
+            </ion-col>
+            <ion-col col-6 class="aligncenter">
+                <button ion-button icon-left clear small>
+                    <ion-icon name="md-share"></ion-icon>
+                    <div>4 Shares</div>
+                    </button>
+            </ion-col>
+        </ion-row>
+
+    </ion-card>
+    <div class="message-wrap">
+
+        <div *ngFor="let msg of msgList" class="message" [class.left]=true>
+            <img class="user-img" [src]="msg.userAvatar" alt="" src="">
+            <div class="msg-detail">
+                <div class="msg-info">
+                    <p>
+                        {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p>
+                </div>
+                <div class="msg-content">
+                    <span class="triangle"></span>
+                    <p class="line-breaker ">{{msg.message}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </ion-content>
+<ion-footer no-border>
+    <div class="input-wrap">
+        <textarea #chat_input placeholder="Answere or Reply" [(ngModel)]="editorMsg" (focusin)="onFocus()">
+        </textarea>
+        <button ion-button clear icon-only item-right (click)="sendMsg()">
+          <ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+        </button>
+    </div>
+</ion-footer>

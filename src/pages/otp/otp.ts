@@ -18,7 +18,7 @@ export class OtpPage {
 
   ionViewDidLoad() {
     this.user = JSON.parse(localStorage.getItem('user')) ;
-    console.log('ionViewDidLoad OtpPage',this.user.Mobile);
+    console.log('ionViewDidLoad OtpPage',this.navParams.data);
   }
 
   resendOtp()
@@ -81,7 +81,13 @@ export class OtpPage {
   {
     if(this.otp)
     {
-      this.navCtrl.setRoot('ProfessionCategoryPage');
+      if(this.navParams.data != "login")
+      {
+        this.navCtrl.setRoot('ProfessionCategoryPage');
+      }
+      else{
+        this.navCtrl.setRoot('TabsHomePage');
+      }
       // var sndotp = localStorage.getItem('otp');
       // console.log("catch" +sndotp);
       // if(this.otp == sndotp)

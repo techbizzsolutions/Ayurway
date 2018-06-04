@@ -8,7 +8,7 @@
 <ion-content padding>
     <h5>Discuss help learn Grow</h5>
     <h6>Welcome Doctor</h6>
-    <p>Please enter your mobile number and get register</p>
+    <p>Please enter your mobile number and get login</p>
     <form [formGroup]="register" (ngSubmit)="logForm()">
         <ion-item>
             <ion-label floating>Mobile Number</ion-label>
@@ -19,11 +19,11 @@
         </div>
         <!-- Float the icon right -->
         <div class="button_div">
-            <button ion-button type="submit" block [disabled]="!register.valid" icon-right>
-                Register
-            <ion-icon name="log-in"></ion-icon>
-            </button>
-            <p (click)="login()"> Already Register ? Login here</p>
+            <button ion-button block [disabled]="!register.valid" icon-right>
+              Login
+          <ion-icon name="log-in"></ion-icon>
+          </button>
+            <p (click)="login()"> Not Register ? Register here</p>
         </div>
     </form>
 </ion-content>

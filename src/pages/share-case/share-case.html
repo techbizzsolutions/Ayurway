@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <p>
+        Select Image for case
+        <button ion-button (click)="uploadimage()" icon-right>
+          Upload
+          <ion-icon name="image"></ion-icon>
+       </button>
+    </p>
+    <img *ngIf="uploadedimageds" [src]="uploadedimageds">
+    <form [formGroup]="applicant">
+        <ion-item>
+            <ion-textarea placeholder="Enter case details" rows="4" formControlName="Name"></ion-textarea>
+        </ion-item>
+        <div padding-horizontal>
+            <div class="alert" *ngIf="!applicant.controls['Name'].valid && applicant.controls['Name'].touched">Enter case details</div>
+        </div>
+        <!-- Float the icon right -->
+        <div class="button_div">
+            <button ion-button block (click)="applicantForm()" [disabled]="!applicant.valid" icon-right>
+      Submit
+    </button>
+        </div>
+    </form>
+</ion-content>
