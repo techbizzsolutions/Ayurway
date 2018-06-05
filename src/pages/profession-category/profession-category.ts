@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -24,7 +25,9 @@ export class ProfessionCategoryPage {
     {
       name:'Paramedic',
     }]
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+     public api: ApiProvider,
+     public navParams: NavParams) {
   }
 
   itemclick(item:any)
@@ -35,8 +38,20 @@ export class ProfessionCategoryPage {
     localStorage.setItem('user', JSON.stringify(user));
     this.navCtrl.push('MainSpecialityPage',item);
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfessionCategoryPage');
+    this.getProfession();
   }
 
+  getProfession()
+  {
+    this.api.auth('professions', {
+      "doctor_id":"2"
+    }).subscribe(res => {
+       console.log('getProfession',res);
+    }, err => {
+      console.log('getProfession err',err);
+    })
+  }
 }

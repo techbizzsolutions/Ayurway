@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ImageSelectorProvider } from '../../providers/image-selector/image-selector';
+import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 
 @IonicPage()
 @Component({
@@ -8,7 +10,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DiscussPage {
   rootNavCtrl: NavController;
-  region:any;
+  region:any
   tab:any = 'Discus';
   items = [
     {
@@ -24,7 +26,10 @@ export class DiscussPage {
       name:'Biochemistry',
     }
   ];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public imgselect:ImageSelectorProvider,
+    private loader: LoaderServiceProvider,
+    public navParams: NavParams) {
     this.rootNavCtrl = this.navParams.get('rootNavCtrl');
   }
 
@@ -39,12 +44,18 @@ export class DiscussPage {
      this.rootNavCtrl.push('OtherProfilePage');
 
   }
-
-  share()
-  {
-    console.log('share DiscussPage');
-  }
   
+  shareData()
+  {
+      this.loader.Show("downloading image...");
+     this.imgselect.shareData("testing data for sharing","https://vignette.wikia.nocookie.net/dbxfanon/images/f/fd/Link.png")
+     .then(res=>{
+      this.loader.Hide();
+    }).catch(err=>{
+      this.loader.Hide();
+    });
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad DiscussPage');
   }

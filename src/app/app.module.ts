@@ -18,6 +18,9 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { ImageSelectorProvider } from '../providers/image-selector/image-selector';
+import { ApiProvider } from '../providers/api/api';
+import { Network } from '@ionic-native/network';
+import { ToastProvider } from '../providers/toast/toast';
 
 @NgModule({
   declarations: [
@@ -46,10 +49,13 @@ import { ImageSelectorProvider } from '../providers/image-selector/image-selecto
     FileTransfer,
     Camera,
     File,
+    Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SmsServiceProvider,
     LoaderServiceProvider,
-    ImageSelectorProvider
+    ImageSelectorProvider,
+    ApiProvider,
+    ToastProvider
   ]
 })
 export class AppModule {}

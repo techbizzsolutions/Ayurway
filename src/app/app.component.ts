@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { DomSanitizer } from '@angular/platform-browser';
-import { SocialSharing } from '@ionic-native/social-sharing';
+import { ImageSelectorProvider } from '../providers/image-selector/image-selector';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +25,7 @@ export class MyApp {
     private domSanitizer: DomSanitizer,
     public menuCtrl: MenuController,
     public events: Events,
-    private socialSharing: SocialSharing,
+    public imgselect:ImageSelectorProvider,
     splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -108,12 +108,7 @@ export class MyApp {
 
   shareApp()
   {
-    // Check if sharing via email is supported
-    this.socialSharing.share("Law Protectors App is mainly for Their Customers who wants to register their Trademark, Copyright Application. Through this app They can easily fill up the form details and submit to the Company Authorized Representative.", null, null, 'https://play.google.com/store/apps/details?id=com.technotwit.lowprotector').then(() => {
-      // Sharing via email is possible
-    }).catch(() => {
-      // Sharing via email is not possible
-    });
+    this.imgselect.shareApp("Law Protectors App is mainly for Their Customers who wants to register their Trademark, Copyright Application. Through this app They can easily fill up the form details and submit to the Company Authorized Representative.");
   }
 
   rateUs()

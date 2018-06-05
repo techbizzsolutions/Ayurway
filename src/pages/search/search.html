@@ -1,17 +1,23 @@
 <ion-header>
 
     <ion-navbar color="primary">
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-searchbar placeholder="Search name, speciality ..." (ionInput)="getItems($event)"></ion-searchbar>
     </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
     <ion-list>
         <ion-item *ngFor="let item of items">
-            {{ item }}
+            <ion-avatar item-start>
+                <img [src]="item.img">
+            </ion-avatar>
+            <h6>{{item.name}}</h6>
+            <p>{{item.profession}}</p>
+            <p>{{item.speciality}}</p>
         </ion-item>
     </ion-list>
-
+    <div *ngIf="notfound" class="button_div">
+        <p>Data not found</p>
+    </div>
 </ion-content>

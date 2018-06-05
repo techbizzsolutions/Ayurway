@@ -15,6 +15,7 @@ export class MainSpecialityPage {
     this.initializeItems();
   }
 
+  
   initializeItems() {
     this.items = [
       {
