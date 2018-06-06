@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Network } from '@ionic-native/network';
@@ -18,6 +18,9 @@ export class ApiProvider {
 
   auth(url, data): Observable<any> {
     console.log(url, data)
+    // let header = new HttpHeaders();
+    // header.append('Content-Type',  'application/json; charset=UTF-8');
+    // header.append('Accept', 'application/json');
     if (this.isOnline()) {
       return this.http.post<any>(this.host + url, data);
     }
@@ -27,7 +30,7 @@ export class ApiProvider {
         message: "You are not connected to the internet", duration: 3000,
         position: 'top'
       });
-      return Observable.of({ error: '2', message: "You are not connected to the internet", data: [] });
+      return Observable.of({ authorization: false, message: "You are not connected to the internet", data: [] });
     }
 
   }

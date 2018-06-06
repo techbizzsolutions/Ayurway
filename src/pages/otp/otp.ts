@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angul
 import { HomePage } from '../home/home';
 import { SmsServiceProvider } from '../../providers/sms-service/sms-service';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
+import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -13,7 +15,10 @@ export class OtpPage {
 
   otp:any;
   user:any;
-  constructor(public navCtrl: NavController,private openNativeSettings: OpenNativeSettings,public smsServiceProvider: SmsServiceProvider,public alertCtrl: AlertController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public api: ApiProvider,
+    private loader: LoaderServiceProvider,
+    private openNativeSettings: OpenNativeSettings,public smsServiceProvider: SmsServiceProvider,public alertCtrl: AlertController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -82,12 +87,38 @@ export class OtpPage {
     if(this.otp)
     {
       if(this.navParams.data != "login")
-      {
-        this.navCtrl.setRoot('ProfessionCategoryPage');
-      }
-      else{
-        this.navCtrl.setRoot('TabsHomePage');
-      }
+        {
+              
+             this.navCtrl.setRoot('ProfessionCategoryPage');
+        }
+        else{
+          this.navCtrl.setRoot('TabsHomePage');
+        }
+
+    //   this.loader.Show("Loading...");
+    //   this.api.auth('check_otp', {
+    //   "doctor_id":"2",
+    //   "otp":this.otp
+    // }).subscribe(res => {
+    //    console.log('logForm',res);
+    //    if(res.authorization)
+    //    {
+    //     if(this.navParams.data != "login")
+    //     {
+              
+    //          this.navCtrl.setRoot('ProfessionCategoryPage');
+    //     }
+    //     else{
+    //       this.navCtrl.setRoot('TabsHomePage');
+    //     }
+         
+    //    }
+    //    this.loader.Hide();
+    // }, err => {
+    //   this.loader.Hide();
+    //   console.log('getProfession err',err);
+    // });
+  
       // var sndotp = localStorage.getItem('otp');
       // console.log("catch" +sndotp);
       // if(this.otp == sndotp)

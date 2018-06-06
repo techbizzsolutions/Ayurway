@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -10,28 +12,18 @@ export class MainSpecialityPage {
   title:any = "Ayurway";
   searchQuery: string = '';
   items:any;
+  Mainitems:any;
   noresult:boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.initializeItems();
+  constructor(public navCtrl: NavController, 
+    public api: ApiProvider,
+    private loader: LoaderServiceProvider,
+    public navParams: NavParams) {
   }
 
-  
   initializeItems() {
-    this.items = [
-      {
-        name:'Allergy & Immunology',
-      },
-      {
-        name:'Anatomy',
-      },
-      {
-        name:'Anesthsia',
-      },
-      {
-        name:'Biochemistry',
-      }
-    ];
+    this.items = this.Mainitems;
   }
+
   getItems(ev: any) {
     // Reset items back to all of the items
     this.initializeItems();
@@ -58,7 +50,7 @@ export class MainSpecialityPage {
   {
     console.log(item);
     let user = JSON.parse(localStorage.getItem('user')) ;
-    user.mainspeciality = item.name;
+    user.mainspeciality = item;
     localStorage.setItem('user', JSON.stringify(user));
     this.navCtrl.push('SubSpecialityPage',item);
   }
@@ -66,6 +58,26 @@ export class MainSpecialityPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainSpecialityPage',this.navParams.data);
     this.title = this.navParams.data.name;
+    this.getMainspeciality();
   }
 
+  getMainspeciality()
+  {
+    this.loader.Show("Loading...");
+    this.api.auth('specialities', {
+      "doctor_id":"2"
+    }).subscribe(res => {
+       console.log('getMainspeciality',res);
+       if(res.authorization)
+       {
+           this.items = res.specialities;
+           this.Mainitems = res.specialities;
+       }
+       this.loader.Hide();
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+    })
+  }
+  
 }

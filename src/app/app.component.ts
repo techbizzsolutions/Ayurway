@@ -123,7 +123,7 @@ export class MyApp {
         {
           this.menuCtrl.swipeEnable(true, 'menu1');
           this.UserFname = this.user['personaldetails']['First'] + " " + this.user['personaldetails']['Last'];
-          this.UserLname = this.user['iam'];
+          this.UserLname = this.user['iam'].name;
           this.profilepic = (this.user['img']) ? this.domSanitizer.bypassSecurityTrustResourceUrl(this.user['img']) : "assets/imgs/ic_profile_dp1.jpg";
        }
   }

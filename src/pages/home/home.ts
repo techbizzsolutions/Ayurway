@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { ApiProvider } from '../../providers/api/api';
 
 @Component({
   selector: 'page-home',
@@ -11,6 +13,8 @@ export class HomePage {
   user:any;
   constructor(
     public navCtrl: NavController,
+    public api: ApiProvider,
+    private loader: LoaderServiceProvider,
     public formBuilder: FormBuilder) {
       this.user = JSON.parse(localStorage.getItem('user'));
         console.log(this.user);
@@ -31,12 +35,28 @@ export class HomePage {
   logForm()
   {
     console.log('click');
-      localStorage.setItem('user', JSON.stringify(this.register.value));
-      this.navCtrl.push('OtpPage','register');
+        localStorage.setItem('user', JSON.stringify(this.register.value));
+        this.navCtrl.push('OtpPage','register');
+      // this.loader.Show("Loading...");
+      // this.api.auth('register', {
+      //   "phone":this.register.value.Mobile
+      // }).subscribe(res => {
+      //   console.log('getProfession',res);
+      //   if(res.authorization)
+      //   {
+           
+      //   }
+      //   this.loader.Hide();
+      // }, err => {
+      //   this.loader.Hide();
+      //   console.log('getProfession err',err);
+      // })
   }
 
   login()
   {
     this.navCtrl.setRoot('LoginPage');
   }
+
+
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -8,20 +10,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SubSpecialityPage {
   title:any = "Ayurway";
-  subSpeciality = [
-    {
-      title: 'Asthma & Allergic Conditions',
-      selected: false
-    },
-    {
-      title: 'Clinical & Laboratory Immunology',
-      selected: false
-    },
-    {
-      title: 'General & Allergy & Immunology',
-      selected: false
-    }];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  subSpeciality = [];
+  constructor(public navCtrl: NavController,
+    public api: ApiProvider,
+    private loader: LoaderServiceProvider,
+    public navParams: NavParams) {
   }
 
   done()
@@ -32,7 +25,7 @@ export class SubSpecialityPage {
         if(element.selected)
         {
           check = true;
-          arry.push(element.title);
+          arry.push(element.id);
         }
 
     });
@@ -45,6 +38,32 @@ export class SubSpecialityPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SubSpecialityPage');
     this.title = this.navParams.data.name;
+    this.getSubspeciality(this.navParams.data.id);
+  }
+  
+  getSubspeciality(Id)
+  {
+    this.loader.Show("Loading...");
+    this.api.auth('sub_specialities', {
+      "doctor_id":"2",
+      "speciality_id":Id
+    }).subscribe(res => {
+       console.log('getMainspeciality',res);
+       if(res.authorization)
+       {
+         res.sub_specialities.forEach(element => {
+           let item = element;
+            item.selected = false;
+            console.log('getProfession item',item);
+            this.subSpeciality.push(item);
+         });
+           
+       }
+       this.loader.Hide();
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+    })
   }
 
 }
