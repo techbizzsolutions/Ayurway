@@ -113,6 +113,12 @@ export class OtpPage {
 
   editnumber()
   {
-    this.navCtrl.setRoot(HomePage);
+    if(this.navParams.data === "login")
+    {
+      this.navCtrl.setRoot('LoginPage');
+    }
+    else{
+      this.navCtrl.setRoot(HomePage);
+    }
   }
 }

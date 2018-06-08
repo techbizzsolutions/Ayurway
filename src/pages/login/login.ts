@@ -103,7 +103,7 @@ export class LoginPage {
             }
             break;
             default :
-            this.navCtrl.setRoot('OtpPage','register');
+            this.navCtrl.setRoot('OtpPage','login');
           }
         }
       },

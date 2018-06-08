@@ -97,7 +97,8 @@ export class MyApp {
         break;
         case 'Log Out':
         localStorage.clear();
-        this.nav.setRoot(HomePage);
+        this.menuCtrl.swipeEnable(false, 'menu1');
+        this.nav.setRoot('LoginPage');
         break;
         default:
         {
