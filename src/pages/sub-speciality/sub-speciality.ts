@@ -32,7 +32,7 @@ export class SubSpecialityPage {
     let user = JSON.parse(localStorage.getItem('user')) ;
     user.subspeciality = arry;
     localStorage.setItem('user', JSON.stringify(user));
-    this.navCtrl.push('PersonalDetailsPage');
+    this.navCtrl.push('PersonalDetailsPage',"subspeciality");
   }
 
   ionViewDidLoad() {
@@ -45,7 +45,6 @@ export class SubSpecialityPage {
   {
     this.loader.Show("Loading...");
     this.api.auth('sub_specialities', {
-      "doctor_id":"2",
       "speciality_id":Id
     }).subscribe(res => {
        console.log('getMainspeciality',res);

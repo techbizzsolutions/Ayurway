@@ -9,6 +9,7 @@ import { File } from '@ionic-native/file';
 import { NgZone } from '@angular/core';
 import { HomePage } from '../home/home';
 import { ImageSelectorProvider } from '../../providers/image-selector/image-selector';
+import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -16,13 +17,15 @@ import { ImageSelectorProvider } from '../../providers/image-selector/image-sele
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  profiledata:any;
   user: any;
   profilePic: any = 'assets/imgs/ic_profile_dp1.jpg';
   loadProgress: Number = 0;
   showBar: boolean = false;
   fileTransfer: FileTransferObject;
   constructor(public navCtrl: NavController,
-    private loader: LoaderServiceProvider,
+    public api: ApiProvider,
+    private loader: LoaderServiceProvider, 
     private camera: Camera,
     public ngZone: NgZone,
     public imgselect:ImageSelectorProvider,
@@ -37,6 +40,7 @@ export class ProfilePage {
     events.subscribe('user:profile', () => {
       console.log('user:profile');
       this.updateProfile();
+      this.getProfile();
     });
   }
 
@@ -176,11 +180,13 @@ export class ProfilePage {
 
   }
 
-  itemclick(item: any) {
-    console.log(item)
-    switch (item) {
+  itemclick(type: any,action:any,item:any) {
+    console.log(type  + action + item);
+    let rowdate = item;
+    rowdate.action = action;
+    switch (type) {
       case 'Membership':
-        this.navCtrl.push('MembershipPage');
+        this.navCtrl.push('MembershipPage',rowdate);
         break;
       case 'Experience':
         this.navCtrl.push('ExperiencePage');
@@ -226,6 +232,24 @@ export class ProfilePage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+    this.getProfile();
+  }
+
+  getProfile()
+  {
+    this.loader.Show("Loading...");
+    this.api.auth('get_profile', {
+    }).subscribe(res => {
+       console.log('getProfile',res);
+       if(res.authorization)
+       {
+          this.profiledata = res;
+       }
+       this.loader.Hide();
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfile err',err);
+    })
   }
 
 }

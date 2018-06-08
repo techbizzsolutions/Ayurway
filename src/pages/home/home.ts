@@ -34,23 +34,21 @@ export class HomePage {
 
   logForm()
   {
-    console.log('click');
-        localStorage.setItem('user', JSON.stringify(this.register.value));
-        this.navCtrl.push('OtpPage','register');
-      // this.loader.Show("Loading...");
-      // this.api.auth('register', {
-      //   "phone":this.register.value.Mobile
-      // }).subscribe(res => {
-      //   console.log('getProfession',res);
-      //   if(res.authorization)
-      //   {
-           
-      //   }
-      //   this.loader.Hide();
-      // }, err => {
-      //   this.loader.Hide();
-      //   console.log('getProfession err',err);
-      // })
+      this.loader.Show("Loading...");
+      this.api.auth('register', {
+        "phone":this.register.value.Mobile
+      }).subscribe(res => {
+        console.log('getProfession',res);
+        if(res.authorization)
+        {
+          localStorage.setItem('user', JSON.stringify(this.register.value));
+          this.navCtrl.push('OtpPage','register');
+        }
+        this.loader.Hide();
+      }, err => {
+        this.loader.Hide();
+        console.log('getProfession err',err);
+      })
   }
 
   login()

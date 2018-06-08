@@ -17,12 +17,11 @@ export class ApiProvider {
   }
 
   auth(url, data): Observable<any> {
-    console.log(url, data)
-    // let header = new HttpHeaders();
-    // header.append('Content-Type',  'application/json; charset=UTF-8');
-    // header.append('Accept', 'application/json');
+    let rowdata = data;
+    rowdata.doctor_id = 2;
+    console.log(url, rowdata);
     if (this.isOnline()) {
-      return this.http.post<any>(this.host + url, data);
+      return this.http.post<any>(this.host + url, JSON.stringify(rowdata));
     }
     else {
       console.log("not connected");

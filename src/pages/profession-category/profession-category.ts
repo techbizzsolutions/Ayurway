@@ -34,7 +34,6 @@ export class ProfessionCategoryPage {
   {
     this.loader.Show("Loading...");
     this.api.auth('professions', {
-      "doctor_id":"2"
     }).subscribe(res => {
        console.log('getProfession',res);
        if(res.authorization)

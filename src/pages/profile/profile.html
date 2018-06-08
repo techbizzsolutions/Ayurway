@@ -9,7 +9,7 @@
 <ion-content>
     <ion-card>
         <ion-card-content>
-            <ion-item *ngIf="user">
+            <ion-item *ngIf="profiledata">
                 <ion-thumbnail item-start>
                     <div class="outerdiv" (click)="changePic()">
                         <div class="setclircle">
@@ -18,12 +18,12 @@
                         </div>
                     </div>
                 </ion-thumbnail>
-                <h2 (click)="itemclick('personal')"> Dr. <strong>{{user.personaldetails.First}} </strong><strong>{{user.personaldetails.Last}} </strong>
+                <h2 (click)="itemclick('personal')"> Dr. <strong>{{profiledata.first_name}} </strong><strong>{{profiledata.last_name}} </strong>
                     <span> 
                                 <ion-icon color="primary" name="md-create"></ion-icon>
                            </span></h2>
-                <p>{{user.iam.name}}</p>
-                <p>{{user.personaldetails.City}}</p>
+                <p>{{profiledata.profession}}</p>
+                <p>{{profiledata.city}}</p>
             </ion-item>
             <progress-bar *ngIf="showBar" [progress]="loadProgress"></progress-bar>
         </ion-card-content>
@@ -62,7 +62,7 @@
     <hr>
     <ion-card>
         <ion-card-content>
-            <ion-list *ngIf="user">
+            <ion-list *ngIf="profiledata">
                 <ion-item-divider color="light" class="dividerpadding">
                     <h6>Basic Info </h6>
                 </ion-item-divider>
@@ -70,7 +70,7 @@
                     <h6>Phone </h6>
                     <ion-row>
                         <ion-col col-11>
-                            <p class="title">{{user.Mobile}}</p>
+                            <p class="title">{{profiledata.phone}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
@@ -81,7 +81,7 @@
                     <h6>Email </h6>
                     <ion-row>
                         <ion-col col-11>
-                            <p class="title">{{user.personaldetails.Email}}</p>
+                            <p class="title">{{profiledata.email}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
@@ -92,24 +92,24 @@
                     <h6>Summary </h6>
                     <ion-row>
                         <ion-col col-11>
-                            <p style="white-space: normal !important;" class="title">{{user.personaldetails.Summary}}</p>
+                            <p style="white-space: normal !important;" class="title">{{profiledata.about_doctor}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
                 </ion-item>
-                <ion-item (click)="itemclick('Membership')">
+                <ion-item>
                     <h6>Membership </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.membership; " (click)="itemclick('Membership','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">ABC</p>
+                            <p class="title">{{item.membership}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Membership','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Membership</p>
                 </ion-item>
                 <ion-item (click)="itemclick('Experience')">

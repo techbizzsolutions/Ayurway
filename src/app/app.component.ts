@@ -70,7 +70,7 @@ export class MyApp {
           this.rootPage = 'TabsHomePage';
         } else {
           this.menuCtrl.swipeEnable(false, 'menu1');
-          this.rootPage = HomePage;
+          this.rootPage = 'LoginPage';
         }
     });
   }

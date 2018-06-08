@@ -65,7 +65,6 @@ export class MainSpecialityPage {
   {
     this.loader.Show("Loading...");
     this.api.auth('specialities', {
-      "doctor_id":"2"
     }).subscribe(res => {
        console.log('getMainspeciality',res);
        if(res.authorization)

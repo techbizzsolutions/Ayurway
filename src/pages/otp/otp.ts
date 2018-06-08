@@ -97,7 +97,6 @@ export class OtpPage {
 
     //   this.loader.Show("Loading...");
     //   this.api.auth('check_otp', {
-    //   "doctor_id":"2",
     //   "otp":this.otp
     // }).subscribe(res => {
     //    console.log('logForm',res);
