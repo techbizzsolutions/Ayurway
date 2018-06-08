@@ -10,6 +10,7 @@ import { NgZone } from '@angular/core';
 import { HomePage } from '../home/home';
 import { ImageSelectorProvider } from '../../providers/image-selector/image-selector';
 import { ApiProvider } from '../../providers/api/api';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -27,6 +28,7 @@ export class ProfilePage {
     public api: ApiProvider,
     private loader: LoaderServiceProvider, 
     private camera: Camera,
+    public toastProvider: ToastProvider,
     public ngZone: NgZone,
     public imgselect:ImageSelectorProvider,
     private domSanitizer: DomSanitizer,
@@ -241,11 +243,19 @@ export class ProfilePage {
     this.api.auth('get_profile', {
     }).subscribe(res => {
        console.log('getProfile',res);
+       this.loader.Hide();
        if(res.authorization)
        {
           this.profiledata = res;
        }
-       this.loader.Hide();
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+       
     }, err => {
       this.loader.Hide();
       console.log('getProfile err',err);

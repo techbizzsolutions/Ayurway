@@ -8,6 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'news.html',
 })
 export class NewsPage {
+  rootNavCtrl: NavController;
   items = [
     {
       name:'Allergy & Immunology',
@@ -23,8 +24,13 @@ export class NewsPage {
     }
   ];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.rootNavCtrl = this.navParams.get('rootNavCtrl');
   }
 
+  itemclick()
+  {
+    this.rootNavCtrl.push('NewDetailsPage');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewsPage');
   }

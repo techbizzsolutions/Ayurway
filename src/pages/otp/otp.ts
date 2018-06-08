@@ -5,6 +5,7 @@ import { SmsServiceProvider } from '../../providers/sms-service/sms-service';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -17,6 +18,7 @@ export class OtpPage {
   user:any;
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
+    public toastProvider: ToastProvider,
     private loader: LoaderServiceProvider,
     private openNativeSettings: OpenNativeSettings,public smsServiceProvider: SmsServiceProvider,public alertCtrl: AlertController, public navParams: NavParams) {
   }
@@ -28,21 +30,7 @@ export class OtpPage {
 
   resendOtp()
   {
-       var otp = Math.floor(1000 + Math.random() * 9000);
-       localStorage.setItem('otp', otp+"");
-       this.smsServiceProvider.sendMessage(this.user.Mobile,"Your OTP is " + otp).then(res=>{
-         if(res)
-         {
-          this.showAlert("Otp has been sent successfully to " +this.user.Mobile, 1); 
-         }
-         else{
-          this.showAlert("Please enable sms permission,Goto applications->Choose Law Protectors app ->Permissions-> enable sms", 2);    
-         }
-                       
-        }).catch(res=>{
-          console.log("smsServiceProvider catch" +res);
-          this.showAlert("Messgae has been failed, please check your message service", 3); 
-        })
+    
   }
 
   showAlert(message,bol)
@@ -86,7 +74,15 @@ export class OtpPage {
   {
     if(this.otp)
     {
-      if(this.navParams.data != "login")
+      this.loader.Show("Loading...");
+      this.api.auth('check_otp', {
+      "otp":this.otp
+    }).subscribe(res => {
+       console.log('logForm',res);
+       this.loader.Hide();
+       if(res.authorization)
+       {
+        if(this.navParams.data != "login")
         {
               
              this.navCtrl.setRoot('ProfessionCategoryPage');
@@ -94,55 +90,20 @@ export class OtpPage {
         else{
           this.navCtrl.setRoot('TabsHomePage');
         }
-
-    //   this.loader.Show("Loading...");
-    //   this.api.auth('check_otp', {
-    //   "otp":this.otp
-    // }).subscribe(res => {
-    //    console.log('logForm',res);
-    //    if(res.authorization)
-    //    {
-    //     if(this.navParams.data != "login")
-    //     {
-              
-    //          this.navCtrl.setRoot('ProfessionCategoryPage');
-    //     }
-    //     else{
-    //       this.navCtrl.setRoot('TabsHomePage');
-    //     }
          
-    //    }
-    //    this.loader.Hide();
-    // }, err => {
-    //   this.loader.Hide();
-    //   console.log('getProfession err',err);
-    // });
-  
-      // var sndotp = localStorage.getItem('otp');
-      // console.log("catch" +sndotp);
-      // if(this.otp == sndotp)
-      // {
-      //     var rowdata = [];
-      //     for(var prop in this.user) {
-      //       rowdata.push(prop + ": " + this.user[prop]);
-      //     }
-      //   this.smsServiceProvider.sendMessageTouser(rowdata.join('\r\n')).then(res=>{
-      //     if(res)
-      //     {
-      //      this.showAlert("Data has been sent successfully", 1); 
-      //     }
-      //     else{
-      //      this.showAlert("Please enable sms permission,Goto applications->Choose Law Protectors app ->Permissions-> enable sms", 2);    
-      //     }
-                        
-      //    }).catch(res=>{
-      //      console.log("smsServiceProvider catch" +res);
-      //      this.showAlert("Messgae has been failed, please check your message service", 3); 
-      //    })
-      // }
-      // else{
-      //   this.showAlert("Please enter correct otp", 4); 
-      // }
+       }
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+      
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+    });
       
     }
     else{

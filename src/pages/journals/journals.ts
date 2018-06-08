@@ -7,7 +7,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'journals.html',
 })
 export class JournalsPage {
-
+  rootNavCtrl: NavController;
   items = [
     {
       name:'Allergy & Immunology',
@@ -23,6 +23,12 @@ export class JournalsPage {
     }
   ];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.rootNavCtrl = this.navParams.get('rootNavCtrl');
+  }
+
+  itemclick()
+  {
+     this.rootNavCtrl.push('JournalDetailsPage');
   }
 
   ionViewDidLoad() {

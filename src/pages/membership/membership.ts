@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -15,6 +16,7 @@ export class MembershipPage {
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
     public events: Events,
+    public toastProvider: ToastProvider,
     private loader: LoaderServiceProvider, 
     public formBuilder: FormBuilder,
      public navParams: NavParams) {
@@ -37,6 +39,13 @@ export class MembershipPage {
           this.events.publish('user:profile');
           this.navCtrl.pop();
        }
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
     }, err => {
       this.loader.Hide();
       console.log('getProfession err',err);
@@ -60,13 +69,21 @@ export class MembershipPage {
       'membership_id':id
     }).subscribe(res => {
        console.log('getProfession',res);
+       this.loader.Hide();
        if(res.authorization)
        {
           this.applicant = this.formBuilder.group({
             Name: [res.membership_name, Validators.required]
           });
        }
-       this.loader.Hide();
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+       
     }, err => {
       this.loader.Hide();
       console.log('getProfession err',err);

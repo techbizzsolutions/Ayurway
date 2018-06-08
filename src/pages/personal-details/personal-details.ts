@@ -3,6 +3,7 @@ import { IonicPage,Events, NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ export class PersonalDetailsPage {
     public formBuilder: FormBuilder,
     public events: Events,
     public api: ApiProvider,
+    public toastProvider: ToastProvider,
     private loader: LoaderServiceProvider,
      public navParams: NavParams) {
       this.applicant = this.formBuilder.group({
@@ -45,6 +47,7 @@ export class PersonalDetailsPage {
         "about_doctor":this.applicant.value.Summary
       }).subscribe(res => {
          console.log('save_personal_details',res);
+         this.loader.Hide();
          if(res.authorization)
          {
             user.personaldetails = this.applicant.value;
@@ -53,7 +56,14 @@ export class PersonalDetailsPage {
             this.events.publish('user:loggedIn');
             this.navCtrl.pop();
          }
-         this.loader.Hide();
+         else{
+          this.toastProvider.NotifyWithoutButton({
+            message: res.message, 
+            duration: 3000,
+            position: 'top'
+          });
+        }
+        
       }, err => {
         this.loader.Hide();
         console.log('getProfession err',err);
@@ -71,6 +81,7 @@ export class PersonalDetailsPage {
         "about_doctor":this.applicant.value.Summary
       }).subscribe(res => {
          console.log('getMainspeciality',res);
+         this.loader.Hide();
          if(res.authorization)
          {
             user.personaldetails = this.applicant.value;
@@ -79,7 +90,14 @@ export class PersonalDetailsPage {
             this.events.publish('user:loggedIn');
             this.navCtrl.setRoot('TabsHomePage');
          }
-         this.loader.Hide();
+         else{
+          this.toastProvider.NotifyWithoutButton({
+            message: res.message, 
+            duration: 3000,
+            position: 'top'
+          });
+        }
+        
       }, err => {
         this.loader.Hide();
         console.log('getProfession err',err);
@@ -95,6 +113,7 @@ export class PersonalDetailsPage {
    
     }).subscribe(res => {
        console.log('getMainspeciality',res);
+       this.loader.Hide();
        if(res.authorization)
        {
         this.applicant = this.formBuilder.group({
@@ -108,7 +127,14 @@ export class PersonalDetailsPage {
           Summary:[res.about_doctor,Validators.required]
         });
        }
-       this.loader.Hide();
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+       
     }, err => {
       this.loader.Hide();
       console.log('getProfession err',err);

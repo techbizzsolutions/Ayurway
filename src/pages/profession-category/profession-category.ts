@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -12,6 +13,7 @@ export class ProfessionCategoryPage {
   iam:any = [];
   constructor(public navCtrl: NavController,
      public api: ApiProvider,
+     public toastProvider: ToastProvider,
      private loader: LoaderServiceProvider,
      public navParams: NavParams) {
   }
@@ -36,11 +38,19 @@ export class ProfessionCategoryPage {
     this.api.auth('professions', {
     }).subscribe(res => {
        console.log('getProfession',res);
+       this.loader.Hide();
        if(res.authorization)
        {
            this.iam = res.professions;
        }
-       this.loader.Hide();
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+       
     }, err => {
       this.loader.Hide();
       console.log('getProfession err',err);

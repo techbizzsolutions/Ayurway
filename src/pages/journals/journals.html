@@ -10,23 +10,16 @@
         </ion-card-content>
     </ion-card>
     <ion-list>
-        <ion-item>
-            <ion-thumbnail item-start>
-                <img src="assets/imgs/dummy.jpg">
-            </ion-thumbnail>
-            <h2 style="white-space: normal !important;">Lok Sabha Bypoll: With Only Palghar in Its Kitty </h2>
-            <h6 style="white-space: normal !important;"> With Only Palghar in Its Kitty</h6>
-            <p>
-                <ion-icon color="primary" name="md-person"></ion-icon> Dr. Ajay Kumar</p>
-        </ion-item>
-        <ion-item>
-            <ion-thumbnail item-start>
-                <img src="assets/imgs/dummy.jpg">
-            </ion-thumbnail>
-            <h2 style="white-space: normal !important;">Lok Sabha Bypoll: With Only Palghar in Its Kitty</h2>
-            <h6 style="white-space: normal !important;"> With Only Palghar in Its Kitty</h6>
-            <p>
-                <ion-icon color="primary" name="md-person"></ion-icon> Dr. Ajay Kumar</p>
-        </ion-item>
+        <ion-card>
+            <ion-item (click)="itemclick()">
+                <ion-thumbnail item-start>
+                    <img src="assets/imgs/dummy.jpg">
+                </ion-thumbnail>
+                <h2 style="white-space: normal !important;">Lok Sabha Bypoll: With Only Palghar in Its Kitty </h2>
+                <h6 style="white-space: normal !important;"> With Only Palghar in Its Kitty</h6>
+                <p>
+                    <ion-icon color="primary" name="md-person"></ion-icon> Dr. Ajay Kumar</p>
+            </ion-item>
+        </ion-card>
     </ion-list>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,7 @@ export class MainSpecialityPage {
   noresult:boolean = false;
   constructor(public navCtrl: NavController, 
     public api: ApiProvider,
+    public toastProvider: ToastProvider,
     private loader: LoaderServiceProvider,
     public navParams: NavParams) {
   }
@@ -67,12 +69,20 @@ export class MainSpecialityPage {
     this.api.auth('specialities', {
     }).subscribe(res => {
        console.log('getMainspeciality',res);
+       this.loader.Hide();
        if(res.authorization)
        {
            this.items = res.specialities;
            this.Mainitems = res.specialities;
        }
-       this.loader.Hide();
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+      
     }, err => {
       this.loader.Hide();
       console.log('getProfession err',err);
