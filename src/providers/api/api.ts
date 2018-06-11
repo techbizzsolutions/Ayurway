@@ -37,6 +37,7 @@ export class ApiProvider {
   }
 
   add(url, data): Observable<any> {
+    console.log(url, data);
     if (this.isOnline()) {
       return this.http.post<any>(this.host + url, JSON.stringify(data));
     }

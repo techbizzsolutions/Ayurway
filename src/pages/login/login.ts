@@ -53,6 +53,7 @@ export class LoginPage {
       if(res.authorization)
       {
         this.register.value.doctor_id = res.doctor_id;
+        this.register.value.res = res;
         localStorage.setItem('user', JSON.stringify(this.register.value));
         this.smsServiceProvider.sendMessage(this.register.value.Mobile,"Your OTP is " + res.otp).then(res=>{
           if(res)

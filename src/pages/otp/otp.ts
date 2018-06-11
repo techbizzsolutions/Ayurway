@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { SmsServiceProvider } from '../../providers/sms-service/sms-service';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
@@ -18,6 +18,7 @@ export class OtpPage {
   user:any;
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
+    public events: Events,
     public toastProvider: ToastProvider,
     private loader: LoaderServiceProvider,
     private openNativeSettings: OpenNativeSettings,public smsServiceProvider: SmsServiceProvider,public alertCtrl: AlertController, public navParams: NavParams) {
@@ -25,7 +26,7 @@ export class OtpPage {
 
   ionViewDidLoad() {
     this.user = JSON.parse(localStorage.getItem('user')) ;
-    console.log('ionViewDidLoad OtpPage',this.navParams.data);
+    console.log('ionViewDidLoad OtpPage',this.user);
   }
 
   resendOtp()
@@ -82,14 +83,30 @@ export class OtpPage {
        this.loader.Hide();
        if(res.authorization)
        {
-        if(this.navParams.data != "login")
-        {
-              
-             this.navCtrl.setRoot('ProfessionCategoryPage');
-        }
-        else{
-          this.navCtrl.setRoot('TabsHomePage');
-        }
+          if(this.navParams.data != "login")
+          {
+              this.navCtrl.setRoot('ProfessionCategoryPage');
+          }
+          else{
+            if(this.user.res.profile_completed == "yes")
+            {
+              this.user.islogin = true;
+              this.user.personaldetails = {
+                 "First":this.user.res.first_name,
+                 "Last":this.user.res.last_name
+              };
+              this.user.iam = {
+                "name":this.user.res.profession,
+              };
+              localStorage.setItem('user', JSON.stringify(this.user));
+              this.events.publish('user:loggedIn');
+              this.navCtrl.setRoot('TabsHomePage');
+            }
+            else{
+              this.navCtrl.setRoot('ProfessionCategoryPage');
+            }
+            
+          }
          
        }
        else{

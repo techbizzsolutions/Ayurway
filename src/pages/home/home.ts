@@ -47,7 +47,7 @@ export class HomePage {
       }).subscribe(res => {
         console.log('getProfession',res);
         this.loader.Hide();
-        if(res.authorization)
+        if(res.authorization && res.profile_completed != "yes")
         {
           this.register.value.doctor_id = res.doctor_id;
           localStorage.setItem('user', JSON.stringify(this.register.value));
