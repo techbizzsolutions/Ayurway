@@ -21,19 +21,19 @@ opencal():Promise<any>
       date => {
         console.log('Got date: ', date)
         let mnth = date.getMonth() + 1;
-        return date.getDate()+"/"+ mnth +"/"+ date.getFullYear();
+        return date.getFullYear()+"-"+ mnth +"-"+date.getDate();
       },
       err => 
       {
         console.log('Error occurred while getting date: ', err);
         var date = new Date();
         let mnth = date.getMonth() + 1;
-        return date.getDate()+"/"+ mnth +"/"+ date.getFullYear();
+        return date.getFullYear()+"-"+ mnth +"-"+date.getDate();
       })
       .catch(err=>{
         var date = new Date();
         let mnth = date.getMonth() + 1;
-        return date.getDate()+"/"+ mnth +"/"+ date.getFullYear();
+        return date.getFullYear()+"-"+ mnth +"-"+date.getDate();
       });
   }
 

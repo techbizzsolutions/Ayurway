@@ -112,67 +112,67 @@
                     <p class="title" (click)="itemclick('Membership','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Membership</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Experience')">
+                <ion-item>
                     <h6>Experience </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.experience;" (click)="itemclick('Experience','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">ABC Hospital</p>
-                            <p class="subtitle">Doctor</p>
-                            <p class="subtitle">11-12-2001 to 10-12-2016</p>
-                            <p class="subtitle">Meerut india</p>
-                            <p style="white-space: normal !important;" class="subtitle"> Soloved cases</p>
+                            <p class="title">{{item.hospital}}</p>
+                            <p class="subtitle">{{item.designation}}</p>
+                            <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
+                            <p class="subtitle">{{item.city}} <span> {{item.country}}</span></p>
+                            <p style="white-space: normal !important;" class="subtitle"> {{item.description}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Experience','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Experience</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Education')">
+                <ion-item>
                     <h6>Education </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.education;" (click)="itemclick('Education','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">ABC institute</p>
-                            <p class="subtitle">MCA</p>
-                            <p class="subtitle">11-12-2001 to 10-12-2016</p>
-                            <p class="subtitle">Meerut india</p>
+                            <p class="title">{{item.institute}}</p>
+                            <p class="subtitle">{{item.degree}}</p>
+                            <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
+                            <p class="subtitle">{{item.city}} <span> {{item.country}}</span></p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Education','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Education</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Awards')">
+                <ion-item>
                     <h6>Awards & Honors </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.awards;" (click)="itemclick('Awards','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">ABC Award</p>
-                            <p style="white-space: normal !important;" class="subtitle">Best performer</p>
+                            <p class="title">{{item.award}}</p>
+                            <p style="white-space: normal !important;" class="subtitle">{{item.description}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Awards','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Awards & Honors</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Publication')">
+                <ion-item>
                     <h6>Publication </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.publications;" (click)="itemclick('Publication','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">ABC name</p>
-                            <p class="subtitle">1234</p>
-                            <p class="subtitle">ajay</p>
-                            <p class="subtitle">N/A</p>
+                            <p class="title">{{item.paper}}</p>
+                            <p class="subtitle">{{item.author}}</p>
+                            <p class="subtitle">{{item.description}}</p>
+                            <p class="subtitle">{{item.link}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Publication','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Publication</p>
                 </ion-item>
                 <ion-item (click)="itemclick('Presentation')">
@@ -205,19 +205,19 @@
                     <p class="title">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Volunteer Experience</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Certification')">
+                <ion-item>
                     <h6>Certification & Courses </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.certifications;" (click)="itemclick('Certification','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">MBBS</p>
-                            <p class="subtitle">shobhit university Meerut</p>
-                            <p class="subtitle">12-12-2001 to 11-12-2012</p>
+                            <p class="title">{{item.title}}</p>
+                            <p class="subtitle">{{item.institute}}</p>
+                            <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Certification','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Certification & Courses</p>
                 </ion-item>
                 <ion-item (click)="itemclick('CME')">

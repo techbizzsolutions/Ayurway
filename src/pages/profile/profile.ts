@@ -183,7 +183,7 @@ export class ProfilePage {
   }
 
   itemclick(type: any,action:any,item:any) {
-    console.log(type  + action + item);
+    console.log(item);
     let rowdate = item;
     rowdate.action = action;
     switch (type) {
@@ -191,16 +191,16 @@ export class ProfilePage {
         this.navCtrl.push('MembershipPage',rowdate);
         break;
       case 'Experience':
-        this.navCtrl.push('ExperiencePage');
+        this.navCtrl.push('ExperiencePage',rowdate);
         break;
       case 'Education':
-        this.navCtrl.push('EducationPage');
+        this.navCtrl.push('EducationPage',rowdate);
         break;
       case 'Awards':
-        this.navCtrl.push('AwardHonorsPage');
+        this.navCtrl.push('AwardHonorsPage' ,rowdate);
         break;
       case 'Publication':
-        this.navCtrl.push('PublicationsPage');
+        this.navCtrl.push('PublicationsPage',rowdate);
         break;
       case 'Presentation':
         this.navCtrl.push('PresentationPage');
@@ -209,7 +209,7 @@ export class ProfilePage {
         this.navCtrl.push('VolunteerExperiencePage');
         break;
       case 'Certification':
-        this.navCtrl.push('CertificationAndCoursesPage');
+        this.navCtrl.push('CertificationAndCoursesPage',rowdate);
         break;
       case 'CME':
         this.navCtrl.push('ComesPage');
