@@ -55,19 +55,21 @@ export class LoginPage {
         this.register.value.doctor_id = res.doctor_id;
         this.register.value.res = res;
         localStorage.setItem('user', JSON.stringify(this.register.value));
-        this.smsServiceProvider.sendMessage(this.register.value.Mobile,"Your OTP is " + res.otp).then(res=>{
-          if(res)
-          {
-           this.showAlert("Otp has been sent successfully to " +this.register.value.Mobile, 1); 
-          }
-          else{
-           this.showAlert("Please enable sms permission,Goto applications->Choose Law Protectors app ->Permissions-> enable sms", 2);    
-          }
+
+        this.navCtrl.setRoot('ProfessionCategoryPage');
+        // this.smsServiceProvider.sendMessage(this.register.value.Mobile,"Your OTP is " + res.otp).then(res=>{
+        //   if(res)
+        //   {
+        //    this.showAlert("Otp has been sent successfully to " +this.register.value.Mobile, 1); 
+        //   }
+        //   else{
+        //    this.showAlert("Please enable sms permission,Goto applications->Choose Law Protectors app ->Permissions-> enable sms", 2);    
+        //   }
                         
-         }).catch(res=>{
-           console.log("smsServiceProvider catch" +res);
-           this.showAlert("Messgae has been failed, please check your message service", 3); 
-         })
+        //  }).catch(res=>{
+        //    console.log("smsServiceProvider catch" +res);
+        //    this.showAlert("Messgae has been failed, please check your message service", 3); 
+        //  })
       }
       else{
         this.toastProvider.NotifyWithoutButton({

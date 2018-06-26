@@ -175,34 +175,34 @@
                     <p class="title" (click)="itemclick('Publication','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Publication</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Presentation')">
+                <ion-item>
                     <h6>Presentation </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.presentations;" (click)="itemclick('Presentation','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">Nirpha</p>
-                            <p style="white-space: normal !important;" class="subtitle">how to hanlde serious cases</p>
-                            <p class="subtitle">N/A</p>
+                            <p class="title">{{item.title}}</p>
+                            <p style="white-space: normal !important;" class="subtitle">{{item.description}}</p>
+                            <p class="subtitle">{{item.link}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Presentation','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Presentation</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Volunteer')">
+                <ion-item>
                     <h6>Volunteer Experience </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.volunteer_experience;" (click)="itemclick('Volunteer','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">Nirpha</p>
-                            <p class="subtitle">Meerut</p>
-                            <p class="subtitle">12-12-2001</p>
+                            <p class="title">{{item.title}}</p>
+                            <p class="subtitle">{{item.location}}</p>
+                            <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Volunteer','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Volunteer Experience</p>
                 </ion-item>
                 <ion-item>
@@ -220,24 +220,24 @@
                     <p class="title" (click)="itemclick('Certification','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Certification & Courses</p>
                 </ion-item>
-                <ion-item (click)="itemclick('CME')">
+                <ion-item>
                     <h6>CME's </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.cmes;" (click)="itemclick('CME','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">ABC</p>
-                            <p class="subtitle">Meerut</p>
-                            <p class="subtitle">21-11-2001</p>
+                            <p class="title">{{item.name}}</p>
+                            <p class="subtitle">{{item.location}}</p>
+                            <p class="subtitle">{{item.date_attended}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('CME','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add CME's</p>
                 </ion-item>
-                <ion-item (click)="itemclick('Language')">
+                <ion-item>
                     <h6>Language </h6>
-                    <ion-row>
+                    <ion-row *ngFor="let item of profiledata.languages;" (click)="itemclick('Language','Edit',item)">
                         <ion-col col-11>
                             <p class="title">English</p>
                         </ion-col>
@@ -245,7 +245,7 @@
                             <ion-icon color="primary" name="md-create"></ion-icon>
                         </ion-col>
                     </ion-row>
-                    <p class="title">
+                    <p class="title" (click)="itemclick('Language','Add',{})">
                         <ion-icon color="primary" name="md-add-circle"></ion-icon> Add Language</p>
                 </ion-item>
             </ion-list>

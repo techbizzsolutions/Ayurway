@@ -5,6 +5,7 @@ import { Network } from '@ionic-native/network';
 import { Platform } from 'ionic-angular/platform/platform';
 import { ToastProvider } from '../toast/toast';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class ApiProvider {
@@ -23,7 +24,7 @@ export class ApiProvider {
     rowdata.doctor_id = this.user.doctor_id;
     console.log(url, rowdata);
     if (this.isOnline()) {
-      return this.http.post<any>(this.host + url, JSON.stringify(rowdata));
+      return this.http.post<any>(this.host + url, JSON.stringify(rowdata)).timeout(1000*60);
     }
     else {
       console.log("not connected");
@@ -39,7 +40,7 @@ export class ApiProvider {
   add(url, data): Observable<any> {
     console.log(url, data);
     if (this.isOnline()) {
-      return this.http.post<any>(this.host + url, JSON.stringify(data));
+      return this.http.post<any>(this.host + url, JSON.stringify(data)).timeout(1000*60);
     }
     else {
       console.log('not connected');

@@ -48,8 +48,10 @@ export class ProfilePage {
 
   updateProfile() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.profilePic = (this.user['img']) ? this.domSanitizer.bypassSecurityTrustResourceUrl(this.user['img']) : "assets/imgs/ic_profile_dp1.jpg";
-    console.log(this.user);
+    if(this.user)
+    {
+      this.profilePic = (this.user['img']) ? this.domSanitizer.bypassSecurityTrustResourceUrl(this.user['img']) : "assets/imgs/ic_profile_dp1.jpg";
+    }
   }
 
   changePic() {
@@ -203,19 +205,19 @@ export class ProfilePage {
         this.navCtrl.push('PublicationsPage',rowdate);
         break;
       case 'Presentation':
-        this.navCtrl.push('PresentationPage');
+        this.navCtrl.push('PresentationPage',rowdate);
         break;
       case 'Volunteer':
-        this.navCtrl.push('VolunteerExperiencePage');
+        this.navCtrl.push('VolunteerExperiencePage',rowdate);
         break;
       case 'Certification':
         this.navCtrl.push('CertificationAndCoursesPage',rowdate);
         break;
       case 'CME':
-        this.navCtrl.push('ComesPage');
+        this.navCtrl.push('ComesPage',rowdate);
         break;
       case 'Language':
-        this.navCtrl.push('LanguagePage');
+        this.navCtrl.push('LanguagePage',rowdate);
         break;
       case 'personal':
         this.navCtrl.push('PersonalDetailsPage');
