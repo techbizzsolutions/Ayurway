@@ -50,10 +50,7 @@ export class PersonalDetailsPage {
          this.loader.Hide();
          if(res.authorization)
          {
-            user.personaldetails = this.applicant.value;
-            user.islogin = true;
-            localStorage.setItem('user', JSON.stringify(user));
-            this.events.publish('user:loggedIn');
+            this.events.publish('user:profile');
             this.navCtrl.pop();
          }
          else{

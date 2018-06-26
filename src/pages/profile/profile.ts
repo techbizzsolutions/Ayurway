@@ -187,7 +187,10 @@ export class ProfilePage {
   itemclick(type: any,action:any,item:any) {
     console.log(item);
     let rowdate = item;
-    rowdate.action = action;
+    if(item)
+    {  
+      rowdate.action = action;
+    }
     switch (type) {
       case 'Membership':
         this.navCtrl.push('MembershipPage',rowdate);
@@ -220,7 +223,7 @@ export class ProfilePage {
         this.navCtrl.push('LanguagePage',rowdate);
         break;
       case 'personal':
-        this.navCtrl.push('PersonalDetailsPage');
+        this.navCtrl.push('PersonalDetailsPage',rowdate);
         break;  
       case 'Phone':
         this.navCtrl.push(HomePage);
