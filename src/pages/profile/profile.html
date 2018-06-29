@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar color="primary">
         <ion-title>
-            Ayurway
+            <!-- Ayurway -->
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -32,28 +32,28 @@
 
     <hr>
 
-    <ion-row class="socialinfo">
+    <ion-row class="socialinfo" *ngIf="profiledata">
         <ion-col col-3>
             <div>
-                <p>128</p>
+                <p>{{profiledata.followers}}</p>
                 <p>Followers</p>
             </div>
         </ion-col>
         <ion-col col-3>
             <div>
-                <p>18</p>
+                <p>{{profiledata.following}}</p>
                 <p>Followings</p>
             </div>
         </ion-col>
         <ion-col col-3>
             <div>
-                <p>12</p>
+                <p>{{profiledata.cases}}</p>
                 <p>Cases</p>
             </div>
         </ion-col>
         <ion-col col-3>
             <div>
-                <p>28</p>
+                <p>{{profiledata.answers}}</p>
                 <p>Answers</p>
             </div>
         </ion-col>

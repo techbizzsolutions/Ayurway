@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Camera } from '@ionic-native/camera';
 import { FileEntry } from '@ionic-native/file';
 import { IonicPage, Events, NavController, ToastController, NavParams, ActionSheetController } from 'ionic-angular';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
@@ -27,7 +26,6 @@ export class ProfilePage {
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
     private loader: LoaderServiceProvider, 
-    private camera: Camera,
     public toastProvider: ToastProvider,
     public ngZone: NgZone,
     public imgselect:ImageSelectorProvider,
@@ -125,12 +123,16 @@ export class ProfilePage {
     this.loader.Show("uploading..");
     console.log("imageFileUri", img);
     let options: FileUploadOptions = {
-      fileKey: 'file',
+      fileKey: 'image',
+      headers: {},
       chunkedMode: false,
+      params:{
+        "doctor_id":this.user.doctor_id,
+      },
       mimeType: "multipart/form-data"
     }
     this.showBar = true;
-    this.fileTransfer.upload(img, 'http://agldashboard.adv8.co/service/hrm/insert_image_muthoot', options)
+    this.fileTransfer.upload(img, 'http://www.technotwitsolutions.com/ayurway/api/upload_image', options)
       .then((data) => {
         // success
         console.log("data", data);
@@ -138,7 +140,8 @@ export class ProfilePage {
         this.loadProgress = 100;
         let res = JSON.parse(data.response);
         let user = JSON.parse(localStorage.getItem('user'));
-        user.img = img;
+        user.img = res.image;
+        this.profilePic = res.image;
         localStorage.setItem('user', JSON.stringify(user));
         this.events.publish('user:loggedIn');
         this._toast.create({

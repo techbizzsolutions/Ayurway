@@ -74,6 +74,7 @@ export class MainSpecialityPage {
        {
            this.items = res.specialities;
            this.Mainitems = res.specialities;
+           localStorage.setItem('specialities', JSON.stringify(res.specialities));
        }
        else{
         this.toastProvider.NotifyWithoutButton({

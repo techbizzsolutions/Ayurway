@@ -1,14 +1,15 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Network } from '@ionic-native/network';
-import { Platform } from 'ionic-angular/platform/platform';
+import { Platform,Nav } from 'ionic-angular';
 import { ToastProvider } from '../toast/toast';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class ApiProvider {
+  @ViewChild(Nav) nav: Nav;
   onDevice: boolean;
   user:any;
   private host: String = 'http://technotwitsolutions.com/ayurway/api/';
@@ -20,6 +21,11 @@ export class ApiProvider {
 
   auth(url, data): Observable<any> {
     this.user = JSON.parse(localStorage.getItem('user'));
+    if(!this.user)
+    {
+       this.nav.setRoot('LoginPage');
+       return
+    }
     let rowdata = data;
     rowdata.doctor_id = this.user.doctor_id;
     console.log(url, rowdata);

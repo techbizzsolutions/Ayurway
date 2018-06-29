@@ -8,20 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class JournalsPage {
   rootNavCtrl: NavController;
-  items = [
-    {
-      name:'Allergy & Immunology',
-    },
-    {
-      name:'Anatomy',
-    },
-    {
-      name:'Anesthsia',
-    },
-    {
-      name:'Biochemistry',
-    }
-  ];
+  items = [];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.rootNavCtrl = this.navParams.get('rootNavCtrl');
   }
@@ -33,6 +20,7 @@ export class JournalsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad JournalsPage');
+    this.items = JSON.parse(localStorage.getItem('specialities'));
   }
 
 }

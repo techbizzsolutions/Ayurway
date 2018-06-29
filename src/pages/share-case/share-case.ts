@@ -6,6 +6,7 @@ import { File,FileEntry } from '@ionic-native/file';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { NgZone } from '@angular/core';
 
 @IonicPage()
 @Component({
@@ -15,9 +16,15 @@ import { LoaderServiceProvider } from '../../providers/loader-service/loader-ser
 export class ShareCasePage {
   uploadedimageds:any;
   applicant : FormGroup;
+  loadProgress: Number = 0;
+  showBar: boolean = false;
+  fileTransfer: FileTransferObject;
+  caseImage:any;
+  filename:any;
   constructor(public navCtrl: NavController,
     private transfer: FileTransfer,
     private file: File,
+    public ngZone: NgZone,
     private loader: LoaderServiceProvider,
     private _toast: ToastController,
     public actionSheetCtrl: ActionSheetController,
@@ -28,6 +35,8 @@ export class ShareCasePage {
       this.applicant = this.formBuilder.group({
         Name: ['', Validators.required]
       });
+      this.fileTransfer = this.transfer.create();
+
   }
 
   ionViewDidLoad() {
@@ -36,24 +45,94 @@ export class ShareCasePage {
 
   applicantForm()
   {
-    this.navCtrl.pop();
+    if(!this.caseImage)
+    {
+      let toast = this._toast.create({
+        message: 'Please select image',
+        position: 'top',
+        duration: 3000
+      });
+      toast.present();
+      return;
+    }
+    this.uploadOnServer(this.caseImage);
   }
+
   uploadOnServer(img: any) {
     console.log('img', img);
     this.loader.Show("uploading..");
-    this.uploadedimageds = this.domSanitizer.bypassSecurityTrustResourceUrl(img);
-    this.loader.Hide();
+    let user = JSON.parse(localStorage.getItem('user'));
+    let options: FileUploadOptions = {
+      fileKey: 'image',
+      headers: {},
+      chunkedMode: false,
+      params:{
+        "doctor_id":user.doctor_id,
+        "title":"abcd",
+        "content": this.applicant.value.Name
+      },
+      mimeType: "multipart/form-data"
+    }
+    this.showBar = true;
+    this.fileTransfer.upload(img, 'http://www.technotwitsolutions.com/ayurway/api/add_discussion', options)
+      .then((data) => {
+        // success
+        console.log("data", data);
+        this.loader.Hide();
+        this.loadProgress = 100;
+        let res = JSON.parse(data.response);
+        this._toast.create({
+          message: res.message,
+          duration: 3000,
+          position: 'top'
+        }).present();
+        setTimeout(() => {
+          this.showBar = false;
+        }, 500);
+       this.navCtrl.pop();
+      }, (err) => {
+        // error
+        this.loader.Hide();
+        this.showBar = false;
+        console.log("data", err);
+        if (err.code != 4) {
+          this._toast.create({
+            message: 'Connection error, please check device is connected to internet',
+            duration: 3000,
+            position: 'top'
+          }).present();
+        }
+      }).catch((err) => {
+        this.loader.Hide();
+        this.showBar = false;
+        console.log("data", err);
+        this._toast.create({
+          message: err,
+          duration: 3000,
+          position: 'top'
+        }).present();
+      });
+
+    this.fileTransfer.onProgress((e) => {
+      console.log((e.lengthComputable) ? Math.floor(e.loaded / e.total * 100) : -1);
+      this.ngZone.run(() => {
+        this.loadProgress = (e.lengthComputable) ? Math.floor(e.loaded / e.total * 100) : -1;
+      });
+    });
   }
 
   checkPicSize(imageURI: any) {
+    this.loader.Show("loading..");
     this.file.resolveLocalFilesystemUrl(imageURI)
       .then(entry => (<FileEntry>entry).file(file => {
         console.log('file', file);
         let bytes = file.size;
-        let val;
+        this.loader.Hide();
         if (bytes < 10485760) {
           console.log("Size = " + bytes);
-          this.uploadOnServer(imageURI);
+          this.caseImage = imageURI;
+          this.filename = file.name;
+          this.uploadedimageds = this.domSanitizer.bypassSecurityTrustResourceUrl(imageURI);
         }
         else {
           let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -67,7 +146,11 @@ export class ShareCasePage {
         }
       }
       ))
-      .catch(err => console.log(err));
+      .catch(err => 
+        {
+          this.loader.Hide();
+          console.log(err)
+        });
   }
 
   uploadimage() {

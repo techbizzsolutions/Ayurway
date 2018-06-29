@@ -22,7 +22,7 @@
 
 <ion-content>
 
-    <super-tabs tabsPlacement="top" scrollTabs=true toolbarBackground="primary" toolbarColor="light" [config]="{ sideMenu: 'left' }" indicatorColor="light" (tabSelect)="onTabSelect($event)">
+    <super-tabs tabsPlacement="top" selectedTabIndex="0" scrollTabs=true toolbarBackground="primary" toolbarColor="light" [config]="{ sideMenu: 'left' }" indicatorColor="light" (tabSelect)="onTabSelect($event)">
         <super-tab *ngFor="let page of pages" [title]="page.title" [root]="page.pageName" [id]="page.id"></super-tab>
     </super-tabs>
 

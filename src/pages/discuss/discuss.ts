@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ImageSelectorProvider } from '../../providers/image-selector/image-selector';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { ApiProvider } from '../../providers/api/api';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -11,23 +13,11 @@ import { LoaderServiceProvider } from '../../providers/loader-service/loader-ser
 export class DiscussPage {
   rootNavCtrl: NavController;
   region:any
-  tab:any = 'Discus';
-  items = [
-    {
-      name:'Allergy & Immunology',
-    },
-    {
-      name:'Anatomy',
-    },
-    {
-      name:'Anesthsia',
-    },
-    {
-      name:'Biochemistry',
-    }
-  ];
+  items:any = [];
   constructor(public navCtrl: NavController,
     public imgselect:ImageSelectorProvider,
+    public api: ApiProvider,
+    public toastProvider: ToastProvider,
     private loader: LoaderServiceProvider,
     public navParams: NavParams) {
     this.rootNavCtrl = this.navParams.get('rootNavCtrl');
@@ -42,7 +32,6 @@ export class DiscussPage {
   otherProfile()
   {
      this.rootNavCtrl.push('OtherProfilePage');
-
   }
   
   shareData()
@@ -57,7 +46,34 @@ export class DiscussPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DiscussPage');
+    console.log('ionViewDidLoad DiscussPage',this.navParams.data);
+    this.items = JSON.parse(localStorage.getItem('specialities'));
+    this.getDiscuss();
+  }
+
+  getDiscuss()
+  {
+    this.loader.Show("Loading...");
+    this.api.auth('get_discussions', {
+    }).subscribe(res => {
+       console.log('get_discussions',res);
+       this.loader.Hide();
+       if(res.authorization)
+       {
+          
+       }
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+       
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+    });
   }
 
   shareCase()

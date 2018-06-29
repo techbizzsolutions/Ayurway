@@ -18,8 +18,10 @@ export class TabsHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) { }
  
-  onTabSelect(ev: any) {
+    onTabSelect(ev: any) {
+      //console.log(ev);
     }
+
     notification()
     {
       this.navCtrl.push('NotificationsPage');

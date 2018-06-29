@@ -14,7 +14,9 @@
           Upload
           <ion-icon name="image"></ion-icon>
        </button>
+        <span>{{filename}}</span>
     </p>
+    <progress-bar *ngIf="showBar" [progress]="loadProgress"></progress-bar>
     <img *ngIf="uploadedimageds" [src]="uploadedimageds">
     <form [formGroup]="applicant">
         <ion-item>

@@ -7,26 +7,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'jobs.html',
 })
 export class JobsPage {
-
-  items = [
-    {
-      name:'Allergy & Immunology',
-    },
-    {
-      name:'Anatomy',
-    },
-    {
-      name:'Anesthsia',
-    },
-    {
-      name:'Biochemistry',
-    }
-  ];
+  items = [];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad JobsPage');
+    this.items = JSON.parse(localStorage.getItem('specialities'));
   }
 
 }
