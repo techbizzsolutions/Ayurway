@@ -7,40 +7,41 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
-        <ion-item>
+    <ion-card *ngIf="discuss">
+        <ion-item >
             <ion-avatar item-start (click)="otherProfile()">
-                <img src="assets/imgs/ic_profile_dp1.jpg">
+                <img [src]="discuss.doctor_image">
             </ion-avatar>
             <div (click)="otherProfile()">
-                <h2>Marty McFly</h2>
-                <p>November 5, 1955</p>
+                <h2>{{discuss.doctor_name}}</h2>
+                <p>{{discuss.specialty}}</p>
+                <p>{{discuss.added_date}}</p>
             </div>
 
             <button ion-button item-end icon-left>
-                    <ion-icon name="md-person-add"></ion-icon>
-                    Follow
-                </button>
+                <ion-icon name="md-person-add"></ion-icon>
+                Follow
+            </button>
         </ion-item>
-        <div>
-            <img src="assets/imgs/dummy.jpg">
+        <div (click)="itemClick(discuss)">
+            <img [src]="discuss.image">
 
             <ion-card-content>
-                <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+                <p>{{discuss.content}}</p>
             </ion-card-content>
         </div>
         <ion-row>
-            <ion-col col-6 class="aligncenter">
+            <ion-col col-6 (click)="like(discuss)" class="aligncenter">
                 <button ion-button icon-left clear small>
-                    <ion-icon name="thumbs-up"></ion-icon>
-                    <div>12 Likes</div>
-                    </button>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>{{discuss.likes}} Likes</div>
+                </button>
             </ion-col>
-            <ion-col col-6 class="aligncenter">
+            <ion-col col-6 (click)="shareData(discuss)" class="aligncenter">
                 <button ion-button icon-left clear small>
-                    <ion-icon name="md-share"></ion-icon>
-                    <div>4 Shares</div>
-                    </button>
+                <ion-icon name="md-share"></ion-icon>
+                <div>{{discuss.shares}} Shares</div>
+                </button>
             </ion-col>
         </ion-row>
 
@@ -48,15 +49,15 @@
     <div class="message-wrap">
 
         <div *ngFor="let msg of msgList" class="message" [class.left]=true>
-            <img class="user-img" [src]="msg.userAvatar" alt="" src="">
+            <img class="user-img" [src]="msg.answer_doctor_image" alt="" src="">
             <div class="msg-detail">
                 <div class="msg-info">
                     <p>
-                        {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p>
+                        {{msg.answer_doctor_name}}&nbsp;&nbsp;&nbsp;{{msg.answer_date | relativeTime}}</p>
                 </div>
                 <div class="msg-content">
                     <span class="triangle"></span>
-                    <p class="line-breaker ">{{msg.message}}</p>
+                    <p class="line-breaker ">{{msg.answer}}</p>
                 </div>
             </div>
         </div>

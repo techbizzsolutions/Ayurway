@@ -1,10 +1,13 @@
 <ion-content>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content></ion-refresher-content>
+              </ion-refresher>
     <ion-card>
         <ion-card-content>
             <ion-item>
                 <ion-label>Speciality</ion-label>
                 <ion-select interface="popover" [(ngModel)]="region">
-                    <ion-option *ngFor="let item of items" [value]="item.name">{{item.name}}</ion-option>
+                    <ion-option *ngFor="let item of items" [value]="item.name" (ionSelect)="select(item)">{{item.name}}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-card-content>
@@ -17,14 +20,19 @@
             Share your case
         </ion-item>
     </ion-card>
-    <ion-card>
-        <ion-item>
+    <div *ngIf="!discusses.length" class="spinnerdiv">
+        <ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>
+    </div>
+    <h5 *ngIf="!discusses.length">No Data Found</h5>
+    <ion-card *ngFor="let discuss of discusses; let i = index">
+        <ion-item >
             <ion-avatar item-start (click)="otherProfile()">
-                <img src="assets/imgs/ic_profile_dp1.jpg">
+                <img [src]="discuss.doctor_image">
             </ion-avatar>
             <div (click)="otherProfile()">
-                <h2>Marty McFly</h2>
-                <p>November 5, 1955</p>
+                <h2>{{discuss.doctor_name}}</h2>
+                <p>{{discuss.specialty}}</p>
+                <p>{{discuss.added_date}}</p>
             </div>
 
             <button ion-button item-end icon-left>
@@ -32,30 +40,30 @@
                 Follow
             </button>
         </ion-item>
-        <div (click)="itemClick()">
-            <img src="assets/imgs/dummy.jpg">
+        <div (click)="itemClick(discuss)">
+            <img [src]="discuss.image">
 
             <ion-card-content>
-                <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+                <p>{{discuss.content}}</p>
             </ion-card-content>
         </div>
         <ion-row>
-            <ion-col col-4>
+            <ion-col col-4 class="aligncenter" (click)="like(discuss,i)">
                 <button ion-button icon-left clear small>
                 <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
+                <div>{{discuss.likes}} Likes</div>
                 </button>
             </ion-col>
-            <ion-col col-4>
-                <button ion-button icon-left clear small>
+            <ion-col col-4 class="aligncenter">
+                <button (click)="itemClick(discuss)" ion-button icon-left clear small>
                 <ion-icon name="text"></ion-icon>
-                <div>4 Answers</div>
+                <div>{{discuss.answers}} Answers</div>
                 </button>
             </ion-col>
-            <ion-col col-4 (click)="shareData()">
+            <ion-col col-4 (click)="shareData(discuss,i)" class="aligncenter">
                 <button ion-button icon-left clear small>
                 <ion-icon name="md-share"></ion-icon>
-                <div>4 Shares</div>
+                <div>{{discuss.shares}} Shares</div>
                 </button>
             </ion-col>
         </ion-row>

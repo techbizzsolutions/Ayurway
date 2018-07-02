@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar color="primary">
         <ion-title>
-            <!-- Ayurway -->
+            Ayurway
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -239,7 +239,7 @@
                     <h6>Language </h6>
                     <ion-row *ngFor="let item of profiledata.languages;" (click)="itemclick('Language','Edit',item)">
                         <ion-col col-11>
-                            <p class="title">English</p>
+                            <p class="title">{{item.language}}</p>
                         </ion-col>
                         <ion-col col-1>
                             <ion-icon color="primary" name="md-create"></ion-icon>

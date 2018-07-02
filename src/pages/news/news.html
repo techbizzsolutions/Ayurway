@@ -1,24 +1,31 @@
 <ion-content>
-    <ion-card>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content></ion-refresher-content>
+              </ion-refresher>
+    <ion-card >
         <ion-card-content>
             <ion-item>
                 <ion-label>Speciality</ion-label>
                 <ion-select interface="popover" [(ngModel)]="region">
-                    <ion-option *ngFor="let item of items" [value]="item.name">{{item.name}}</ion-option>
+                    <ion-option *ngFor="let item of items" (ionSelect)="select(item)" [value]="item.name">{{item.name}}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-card-content>
     </ion-card>
+    <div *ngIf="!news.length" class="spinnerdiv">
+        <ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>
+    </div>
+
+    <h5 *ngIf="!news.length">No Data Found</h5>
     <ion-list>
-        <ion-card>
-            <ion-item (click)="itemclick()">
+        <ion-card  *ngFor="let item of news;">
+            <ion-item (click)="itemclick(item)">
                 <ion-thumbnail item-start>
-                    <img src="assets/imgs/dummy.jpg">
+                    <img [src]="item.image">
                 </ion-thumbnail>
-                <h2 style="white-space: normal !important;">Lok Sabha Bypoll: With Only Palghar in Its Kitty </h2>
-                <h6 style="white-space: normal !important;"> With Only Palghar in Its Kitty</h6>
-                <p>
-                    <ion-icon color="primary" name="md-person"></ion-icon> Dr. Ajay Kumar</p>
+                <h2 style="white-space: normal !important;">{{item.title}} </h2>
+                <h6 >{{item.content}}</h6>
+                <p>{{item.added_date}}</p>
             </ion-item>
         </ion-card>
     </ion-list>

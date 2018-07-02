@@ -8,4 +8,20 @@ page-jobs {
     .item-md ion-thumbnail[item-start] {
         margin: 8px 16px 8px 5px !important;
     }
+    h2{
+        margin: 5px!important;
+        color: color($colors, primary) !important;
+    }
+    .spinnerdiv {
+        text-align: center;
+        .spinner-md-crescent circle {
+            stroke: color($colors, primary) !important;
+        }
+        .spinner svg {
+            width: 80px;
+            height: 80px;
+            stroke: color($colors, primary) !important;
+            fill: color($colors, primary) !important;
+            }
+    }
 }

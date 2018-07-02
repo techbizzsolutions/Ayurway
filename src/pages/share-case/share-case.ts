@@ -70,8 +70,7 @@ export class ShareCasePage {
         "doctor_id":user.doctor_id,
         "title":"abcd",
         "content": this.applicant.value.Name
-      },
-      mimeType: "multipart/form-data"
+      }
     }
     this.showBar = true;
     this.fileTransfer.upload(img, 'http://www.technotwitsolutions.com/ayurway/api/add_discussion', options)

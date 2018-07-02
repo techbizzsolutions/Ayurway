@@ -128,8 +128,7 @@ export class ProfilePage {
       chunkedMode: false,
       params:{
         "doctor_id":this.user.doctor_id,
-      },
-      mimeType: "multipart/form-data"
+      }
     }
     this.showBar = true;
     this.fileTransfer.upload(img, 'http://www.technotwitsolutions.com/ayurway/api/upload_image', options)
@@ -139,6 +138,7 @@ export class ProfilePage {
         this.loader.Hide();
         this.loadProgress = 100;
         let res = JSON.parse(data.response);
+        console.log("res", res);
         let user = JSON.parse(localStorage.getItem('user'));
         user.img = res.image;
         this.profilePic = res.image;

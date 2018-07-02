@@ -2,13 +2,90 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SMS } from '@ionic-native/sms';
 import { DatePicker } from '@ionic-native/date-picker';
+import { LoaderServiceProvider } from '../loader-service/loader-service';
+import { ToastProvider } from '../toast/toast';
+import { ApiProvider } from '../api/api';
 
 @Injectable()
 export class SmsServiceProvider {
   constructor(public http: HttpClient,
     private datePicker: DatePicker,
+    public api: ApiProvider,
+    public toastProvider: ToastProvider,
+    private loader: LoaderServiceProvider,
     private sms: SMS) {
     console.log('Hello SmsServiceProvider Provider');
+}
+
+getlike(id:any): Promise<any>
+  {
+    return new Promise((resolve, reject) => {
+    this.loader.Show("Loading...");
+     this.api.auth('like_discussion', {
+      'discussion_id':id
+    }).subscribe(res => {
+       console.log('like_discussion',res);
+       this.loader.Hide();
+       if(res.authorization)
+       {
+         resolve(res);
+       }
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+        reject({});
+      }
+       
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+      this.toastProvider.NotifyWithoutButton({
+        message: err.message, 
+        duration: 3000,
+        position: 'top'
+      });
+      reject({});
+     });
+    })
+  }
+
+  
+getshare(id:any): Promise<any>
+{
+  return new Promise((resolve, reject) => {
+  this.loader.Show("Loading...");
+   this.api.auth('share_discussion', {
+    'discussion_id':id
+  }).subscribe(res => {
+     console.log('share_discussion',res);
+     this.loader.Hide();
+     if(res.authorization)
+     {
+       resolve(res);
+     }
+     else{
+      this.toastProvider.NotifyWithoutButton({
+        message: res.message, 
+        duration: 3000,
+        position: 'top'
+      });
+      reject({});
+    }
+     
+  }, err => {
+    this.loader.Hide();
+    console.log('getProfession err',err);
+    this.toastProvider.NotifyWithoutButton({
+      message: err.message, 
+      duration: 3000,
+      position: 'top'
+    });
+    reject({});
+   });
+  })
 }
 
 opencal():Promise<any>
