@@ -14,6 +14,7 @@ export class JournalsPage {
   items = [];
   speciality:any="";
   journals =[];
+  isshow:boolean = true;
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
     private loader: LoaderServiceProvider,
@@ -50,10 +51,12 @@ export class JournalsPage {
 
   getNews(id:any)
   {
+    this.isshow = true;
     this.api.auth('get_journals', {
       'specialty_id':id
     }).subscribe(res => {
        console.log('get_journals',res);
+       this.isshow = false;
        if(res.authorization)
        {
           this.journals = res.journals;
@@ -67,6 +70,7 @@ export class JournalsPage {
       }
        
     }, err => {
+      this.isshow = false;
       console.log('getProfession err',err);
       this.toastProvider.NotifyWithoutButton({
         message: err.message, 

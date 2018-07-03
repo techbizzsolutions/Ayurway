@@ -16,6 +16,7 @@ export class DiscussPage {
   region:any
   items:any = [];
   discusses:any = [];
+  isshow:boolean = true;
   speciality:any = "";
   constructor(public navCtrl: NavController,
     public imgselect:ImageSelectorProvider,
@@ -75,7 +76,7 @@ export class DiscussPage {
   shareData(item)
   {
       this.loader.Show("downloading image...");
-     this.imgselect.shareData(item.content,"item.image")
+     this.imgselect.shareData(item.content,item.image)
      .then(res=>{
       this.loader.Hide();
     }).catch(err=>{
@@ -127,9 +128,11 @@ export class DiscussPage {
 
   getDiscuss(id:any)
   {
+    this.isshow = true;
     this.api.auth('get_discussions', {
       'specialty_id':id
     }).subscribe(res => {
+      this.isshow = false;
        console.log('get_discussions',res);
        if(res.authorization)
        {
@@ -144,6 +147,7 @@ export class DiscussPage {
       }
        
     }, err => {
+      this.isshow = false;
       console.log('getProfession err',err);
       this.toastProvider.NotifyWithoutButton({
         message: err.message, 

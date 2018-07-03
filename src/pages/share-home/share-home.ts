@@ -14,6 +14,7 @@ import { ImageSelectorProvider } from '../../providers/image-selector/image-sele
 export class ShareHomePage {
   rootNavCtrl: NavController;
   region:any;
+  isshow:boolean = true;
   items = [];
   discusses:any = [];
   speciality:any = "";
@@ -59,7 +60,7 @@ export class ShareHomePage {
   shareData(item)
   {
       this.loader.Show("downloading image...");
-     this.imgselect.shareData(item.content,"item.image")
+     this.imgselect.shareData(item.content,item.image)
      .then(res=>{
       this.loader.Hide();
     }).catch(err=>{
@@ -111,10 +112,12 @@ export class ShareHomePage {
 
   getDiscuss(id:any)
   {
+    this.isshow = true;
     this.api.auth('get_following_discussions', {
       'specialty_id':id
     }).subscribe(res => {
        console.log('get_following_discussions',res);
+       this.isshow = false;
        if(res.authorization)
        {
           this.discusses = res.discussions;
@@ -129,6 +132,7 @@ export class ShareHomePage {
        
     }, err => {
       console.log('getProfession err',err);
+      this.isshow = false;
       this.toastProvider.NotifyWithoutButton({
         message: err.message, 
         duration: 3000,

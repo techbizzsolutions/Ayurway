@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
+import { ApiProvider } from '../../providers/api/api';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -7,59 +10,51 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'search.html',
 })
 export class SearchPage {
-  notfound:boolean = false;
   searchQuery: string = '';
-  items:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.initializeItems();
+  items:any =[];
+  constructor(public navCtrl: NavController,
+    public api: ApiProvider,
+    public toastProvider: ToastProvider,
+    private loader: LoaderServiceProvider, public navParams: NavParams) {
   }
 
+  profile(item)
+  {
+    this.navCtrl.push('OtherProfilePage',item);
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
   }
 
-  initializeItems() {
-    this.items = [
-      {
-        'img':'assets/imgs/ic_profile_dp1.jpg',
-        'name':'Raj',
-        'profession':'Allopathic Doctor',
-        'speciality':'Anatomy'
-      },
-      {
-        'img':'assets/imgs/ic_profile_dp1.jpg',
-        'name':'Ajay',
-        'profession':'Veterinary',
-        'speciality':'Biochemistry'
-      },
-      {
-        'img':'assets/imgs/ic_profile_dp1.jpg',
-        'name':'Vijay',
-        'profession':'Undergraduate Student',
-        'speciality':'Anesthsia'
-      }
-    ];
-  }
-
-  getItems(ev: any) {
-    // Reset items back to all of the items
-    this.initializeItems();
-    this.notfound = false;
-    // set val to the value of the searchbar
-    const val = ev.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  search(q: string)
+  {
+     this.loader.Show("Loading...")
+      this.api.auth('search', {
+        'search':q
+      }).subscribe(res => {
+        console.log('search',res);
+        this.loader.Hide();
+        if(res.authorization)
+        {
+          this.items = res.search_results;
+        }
+        else{
+          this.toastProvider.NotifyWithoutButton({
+            message: res.message, 
+            duration: 3000,
+            position: 'top'
+          });
+        }
+        
+      }, err => {
+        this.items =[];
+        this.loader.Hide();
+        console.log('getProfession err',err);
+        this.toastProvider.NotifyWithoutButton({
+          message: err.message, 
+          duration: 3000,
+          position: 'top'
+        });
       });
-      if(this.items ==0)
-      {
-        this.notfound = true;
-      }
-      else{
-        this.notfound = false;
-      }
     }
-  }
 }

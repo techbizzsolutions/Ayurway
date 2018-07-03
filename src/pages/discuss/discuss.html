@@ -20,7 +20,7 @@
             Share your case
         </ion-item>
     </ion-card>
-    <div *ngIf="!discusses.length" class="spinnerdiv">
+    <div *ngIf="isshow" class="spinnerdiv">
         <ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>
     </div>
     <h5 *ngIf="!discusses.length">No Data Found</h5>
@@ -35,7 +35,7 @@
                 <p>{{discuss.added_date}}</p>
             </div>
 
-            <button *ngIf="discuss.is_followed" (click)="follow(discuss)" ion-button item-end icon-left small>
+            <button *ngIf="discuss.is_followed == 'no'" (click)="follow(discuss)" ion-button item-end icon-left small>
                 <ion-icon name="md-person-add"></ion-icon>
                 Follow
             </button>

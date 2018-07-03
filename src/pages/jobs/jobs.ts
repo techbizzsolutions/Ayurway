@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ToastProvider } from '../../providers/toast/toast';
+import { ImageSelectorProvider } from '../../providers/image-selector/image-selector';
 
 @IonicPage()
 @Component({
@@ -14,8 +15,10 @@ export class JobsPage {
   items = [];
   speciality:any="";
   jobs = [];
+  isshow:boolean = true;
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
+    public imgselect:ImageSelectorProvider,
     private loader: LoaderServiceProvider,
     public toastProvider: ToastProvider, public navParams: NavParams) {
     this.rootNavCtrl = this.navParams.get('rootNavCtrl');
@@ -30,6 +33,17 @@ export class JobsPage {
     console.log('ionViewDidLoad NewsPage');
     this.items = JSON.parse(localStorage.getItem('specialities'));
     this.getNews("");
+  }
+
+  shareData(item)
+  {
+     this.loader.Show("downloading image...");
+     this.imgselect.shareData(item.content,item.image)
+     .then(res=>{
+      this.loader.Hide();
+    }).catch(err=>{
+      this.loader.Hide();
+    });
   }
 
   doRefresh(refresher) {
@@ -84,10 +98,12 @@ export class JobsPage {
   }
   getNews(id:any)
   {
+    this.isshow = true;
     this.api.auth('get_jobs', {
       'specialty_id':id
     }).subscribe(res => {
        console.log('get_jobs',res);
+       this.isshow = false;
        if(res.authorization)
        {
           this.jobs = res.jobs;
@@ -101,6 +117,7 @@ export class JobsPage {
       }
        
     }, err => {
+      this.isshow = false;
       console.log('getProfession err',err);
       this.toastProvider.NotifyWithoutButton({
         message: err.message, 

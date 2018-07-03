@@ -1,23 +1,22 @@
 <ion-header>
 
     <ion-navbar color="primary">
-        <ion-searchbar placeholder="Search name, speciality ..." (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-searchbar #q placeholder="Search name, speciality ..." (keyup.enter)="search(q.value)">
+        </ion-searchbar>
     </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let item of items">
+        <ion-item *ngFor="let item of items" (click)="profile(item)">
             <ion-avatar item-start>
-                <img [src]="item.img">
+                <img [src]="item.doctor_image">
             </ion-avatar>
-            <h6>{{item.name}}</h6>
-            <p>{{item.profession}}</p>
-            <p>{{item.speciality}}</p>
+            <h6>{{item.doctor_name}}</h6>
+            <p>{{item.doctor_profession}}</p>
+            <p>{{item.doctor_speciality}}</p>
         </ion-item>
     </ion-list>
-    <div *ngIf="notfound" class="button_div">
-        <p>Data not found</p>
-    </div>
+    <h5 *ngIf="!items.length">No Data Found</h5>
 </ion-content>

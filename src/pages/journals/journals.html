@@ -1,8 +1,8 @@
 <ion-content>
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-                <ion-refresher-content></ion-refresher-content>
-              </ion-refresher>
-    <ion-card >
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-card>
         <ion-card-content>
             <ion-item>
                 <ion-label>Speciality</ion-label>
@@ -12,18 +12,18 @@
             </ion-item>
         </ion-card-content>
     </ion-card>
-    <div *ngIf="!journals.length" class="spinnerdiv">
+    <div *ngIf="isshow" class="spinnerdiv">
         <ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>
     </div>
     <h5 *ngIf="!journals.length">No Data Found</h5>
     <ion-list>
-        <ion-card  *ngFor="let item of journals;">
+        <ion-card *ngFor="let item of journals;">
             <ion-item (click)="itemclick(item)">
                 <ion-thumbnail item-start>
                     <img [src]="item.image">
                 </ion-thumbnail>
                 <h2 style="white-space: normal !important;">{{item.title}} </h2>
-                <h6 >{{item.content}}</h6>
+                <h6>{{item.content}}</h6>
                 <p>{{item.added_date}}</p>
             </ion-item>
         </ion-card>

@@ -15,6 +15,7 @@ export class NewsPage {
   items = [];
   speciality:any="";
   news = [];
+  isshow:boolean = true;
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
     private loader: LoaderServiceProvider,
@@ -51,10 +52,12 @@ export class NewsPage {
 
   getNews(id:any)
   {
+    this.isshow = true;
     this.api.auth('get_news', {
       'specialty_id':id
     }).subscribe(res => {
        console.log('get_news',res);
+       this.isshow = false;
        if(res.authorization)
        {
           this.news = res.news;
@@ -68,6 +71,7 @@ export class NewsPage {
       }
        
     }, err => {
+      this.isshow = false;
       console.log('getProfession err',err);
       this.toastProvider.NotifyWithoutButton({
         message: err.message, 

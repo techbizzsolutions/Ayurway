@@ -94,7 +94,7 @@ export class DiscussDetailsPage {
 
   bookmark(item,index)
   {
-    this.msg.getshare(item.id).then(res=>{
+    this.msg.getshare(item.discussion_id).then(res=>{
       console.log('getshare',res);
       if(res && res.status ==="Success")
         {
@@ -112,7 +112,7 @@ export class DiscussDetailsPage {
   shareData(item)
   {
       this.loader.Show("downloading image...");
-     this.imgselect.shareData(item.content,"item.image")
+     this.imgselect.shareData(item.content,item.image)
      .then(res=>{
       this.loader.Hide();
     }).catch(err=>{

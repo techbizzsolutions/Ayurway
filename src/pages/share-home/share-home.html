@@ -12,7 +12,7 @@
             </ion-item>
         </ion-card-content>
     </ion-card>
-    <div *ngIf="!discusses.length" class="spinnerdiv">
+    <div *ngIf="isshow" class="spinnerdiv">
         <ion-spinner icon="bubbles" class="spinner-energized"></ion-spinner>
     </div>
     <h5 *ngIf="!discusses.length">No Data Found</h5>
