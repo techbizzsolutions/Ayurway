@@ -23,14 +23,14 @@
             </ion-item>
         </ion-card-content>
         <ion-row>
-            <ion-col col-6>
+            <ion-col>
                 <button ion-button (click)="call(profiledata.phone)" item-end block icon-left>
                 <ion-icon name="md-call"></ion-icon>
                     Call {{profiledata.phone}}
                </button>
             </ion-col>
-            <ion-col col-6>
-                <button ion-button item-end block icon-left>
+            <ion-col *ngIf="profiledata.is_followed == 'no'">
+                <button ion-button item-end block icon-left (click)="follow()">
                 <ion-icon name="md-person-add"></ion-icon>
                 Follow
             </button>

@@ -84,7 +84,7 @@ export class DiscussDetailsPage {
 
   otherProfile()
   {
-    this.navCtrl.push('OtherProfilePage');
+    this.navCtrl.push('OtherProfilePage',this.navParams.data);
   }
 
   onFocus() {

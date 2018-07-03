@@ -8,9 +8,13 @@ page-news {
     .item-md ion-thumbnail[item-start] {
         margin: 8px 16px 8px 5px !important;
     }
-    h2{
+    h6 {
+        overflow: inherit !important;
+        text-overflow: inherit !important;
+    }
+    h2 {
         color: color($colors, primary) !important;
-    }  
+    }
     .spinnerdiv {
         text-align: center;
         .spinner-md-crescent circle {
@@ -21,6 +25,6 @@ page-news {
             height: 80px;
             stroke: color($colors, primary) !important;
             fill: color($colors, primary) !important;
-            }
+        }
     }
 }

@@ -4,6 +4,7 @@ import { ToastProvider } from '../../providers/toast/toast';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
 import { CallNumber } from '@ionic-native/call-number';
+import { SmsServiceProvider } from '../../providers/sms-service/sms-service';
 
 @IonicPage()
 @Component({
@@ -15,6 +16,7 @@ export class OtherProfilePage {
   profiledata:any;
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
+    public msg: SmsServiceProvider,
     public alertCtrl: AlertController,
     private loader: LoaderServiceProvider, 
     private callNumber: CallNumber,
@@ -29,17 +31,34 @@ export class OtherProfilePage {
     }
   }
 
+  follow()
+  {
+     this.msg.getfollow(this.navParams.data.id).then(res=>{
+         console.log('getfollow',res);
+          if(res.status == "Success")
+          {
+            this.toastProvider.NotifyWithoutButton({
+              message: res.message, 
+              duration: 3000,
+              position: 'top'
+            });
+          }
+     })
+     .catch(err=>{})  
+  }
+
   call(number)
   {
+    let that =this;
     let alert = this.alertCtrl.create({
       subTitle: "Do you want to call ?",
       buttons: [{
         text: 'Ok',
         handler: () => {
-          this.callNumber.isCallSupported()
+          that.callNumber.isCallSupported()
           .then(function (response) {
               if (response == true) {
-                this.callNumber.callNumber(number, true)
+                that.callNumber.callNumber(number, true)
                 .then(res => console.log('Launched dialer!', res))
                 .catch(err => console.log('Error launching dialer', err));
               }

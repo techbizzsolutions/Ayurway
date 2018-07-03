@@ -31,7 +31,40 @@ export class OtpPage {
 
   resendOtp()
   {
-    
+    this.loader.Show("Loading...");
+    this.api.add('register', {
+      "phone":this.user.Mobile
+    }).subscribe(res => {
+      console.log('register',res);
+      this.loader.Hide();
+      if(res.authorization)
+      {
+        this.smsServiceProvider.sendMessage(this.user.Mobile,"Your OTP is " + res.otp).then(res=>{
+          if(res)
+          {
+           this.showAlert("Otp has been sent successfully to " +this.user.Mobile, 1); 
+          }
+          else{
+           this.showAlert("Please enable sms permission,Goto applications->Choose Law Protectors app ->Permissions-> enable sms", 2);    
+          }
+                        
+         }).catch(res=>{
+           console.log("smsServiceProvider catch" +res);
+           this.showAlert("Messgae has been failed, please check your message service", 3); 
+         })
+      }
+      else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+      
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+    })  
   }
 
   showAlert(message,bol)
@@ -43,6 +76,8 @@ export class OtpPage {
         handler: () => {
           switch (bol)
           {
+            case 1:
+            break;
             case 2:
             {
               this.openNativeSettings.open("application").then(res=>{
@@ -51,12 +86,8 @@ export class OtpPage {
             }
             break;
             case 4:
-            {
-             
-            }
             break;
             default :
-            this.navCtrl.setRoot('ServicesPage');
           }
         }
       },
@@ -99,8 +130,7 @@ export class OtpPage {
                 "name":this.user.res.profession,
               };
               localStorage.setItem('user', JSON.stringify(this.user));
-              this.events.publish('user:loggedIn');
-              this.navCtrl.setRoot('TabsHomePage');
+              this.getMainspeciality();
             }
             else{
               this.navCtrl.setRoot('ProfessionCategoryPage');
@@ -126,6 +156,33 @@ export class OtpPage {
     else{
       this.showAlert("Please enter otp", 4); 
     }
+  }
+
+  getMainspeciality()
+  {
+    this.loader.Show("Loading...");
+    this.api.auth('specialities', {
+    }).subscribe(res => {
+       console.log('getMainspeciality',res);
+       this.loader.Hide();
+       if(res.authorization)
+       {
+           localStorage.setItem('specialities', JSON.stringify(res.specialities));
+           this.events.publish('user:loggedIn');
+           this.navCtrl.setRoot('TabsHomePage');
+       }
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+      }
+      
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+    })
   }
 
   editnumber()

@@ -29,7 +29,7 @@
             <ion-avatar item-start (click)="otherProfile(discuss)">
                 <img [src]="discuss.doctor_image">
             </ion-avatar>
-            <div (click)="otherProfile()">
+            <div (click)="otherProfile(discuss)">
                 <h2>{{discuss.doctor_name}}</h2>
                 <p>{{discuss.specialty}}</p>
                 <p>{{discuss.added_date}}</p>

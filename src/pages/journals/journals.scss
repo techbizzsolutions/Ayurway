@@ -8,8 +8,11 @@ page-journals {
     .item-md ion-thumbnail[item-start] {
         margin: 8px 16px 8px 5px !important;
     }
-
-    h2{
+    h6 {
+        overflow: inherit !important;
+        text-overflow: inherit !important;
+    }
+    h2 {
         color: color($colors, primary) !important;
     }
     .spinnerdiv {
@@ -22,6 +25,6 @@ page-journals {
             height: 80px;
             stroke: color($colors, primary) !important;
             fill: color($colors, primary) !important;
-            }
+        }
     }
 }
