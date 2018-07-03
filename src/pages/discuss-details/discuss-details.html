@@ -8,7 +8,7 @@
 
 <ion-content>
     <ion-card *ngIf="discuss">
-        <ion-item >
+        <ion-item>
             <ion-avatar item-start (click)="otherProfile()">
                 <img [src]="discuss.doctor_image">
             </ion-avatar>
@@ -18,7 +18,7 @@
                 <p>{{discuss.added_date}}</p>
             </div>
 
-            <button ion-button item-end icon-left>
+            <button *ngIf="discuss.is_followed == 'no'" (click)="follow(discuss)" ion-button item-end icon-left>
                 <ion-icon name="md-person-add"></ion-icon>
                 Follow
             </button>
@@ -31,17 +31,22 @@
             </ion-card-content>
         </div>
         <ion-row>
-            <ion-col col-6 (click)="like(discuss)" class="aligncenter">
+            <ion-col col-4 class="aligncenter" (click)="like(discuss,i)">
                 <button ion-button icon-left clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>{{discuss.likes}} Likes</div>
-                </button>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>{{discuss.likes}} Likes</div>
+                    </button>
             </ion-col>
-            <ion-col col-6 (click)="shareData(discuss)" class="aligncenter">
+            <ion-col col-4(click)="bookmark(discuss,i)" class="aligncenter">
                 <button ion-button icon-left clear small>
-                <ion-icon name="md-share"></ion-icon>
-                <div>{{discuss.shares}} Shares</div>
-                </button>
+                    <ion-icon name="md-bookmark"></ion-icon>
+                    <div>{{discuss.shares}} Bookmark</div>
+                    </button>
+            </ion-col>
+            <ion-col col-4 (click)="shareData(discuss)" class="aligncenter">
+                <button ion-button icon-left clear small>
+                    <ion-icon name="md-share"></ion-icon>
+                    </button>
             </ion-col>
         </ion-row>
 

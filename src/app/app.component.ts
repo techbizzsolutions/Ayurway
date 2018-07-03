@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { Nav,Platform ,Events,MenuController} from 'ionic-angular';
+import { Nav, Platform, Events, MenuController, AlertController, IonicApp } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
@@ -16,15 +16,19 @@ export class MyApp {
   UserFname: String;
   UserLname: String;
   user:any;
+  showedAlert: boolean = false;
+  confirmAlert: any;
   pages: Array<{
     title: string,
     component?: any,
     icon: any
   }>;
-  constructor(platform: Platform, statusBar: StatusBar,
+  constructor(public platform: Platform, statusBar: StatusBar,
     private domSanitizer: DomSanitizer,
     public menuCtrl: MenuController,
     public events: Events,
+    private ionicApp: IonicApp,
+    public alertCtrl: AlertController,
     public imgselect:ImageSelectorProvider,
     splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -72,6 +76,36 @@ export class MyApp {
           this.menuCtrl.swipeEnable(false, 'menu1');
           this.rootPage = 'LoginPage';
         }
+        platform.registerBackButtonAction(() => {
+          let activePortal = this.ionicApp._loadingPortal.getActive() || this.ionicApp._overlayPortal.getActive();
+          this.menuCtrl.close();
+  
+          if (activePortal) {
+            activePortal.dismiss();
+            activePortal.onDidDismiss(() => {
+            });
+            //return;
+          }
+  
+          if (this.ionicApp._modalPortal.getActive()) {
+            this.ionicApp._modalPortal.getActive().dismiss();
+            this.ionicApp._modalPortal.getActive().onDidDismiss(() => {
+            });
+            return;
+          }
+          if (this.nav.length() == 1) {
+            if (!this.showedAlert) {
+              this.confirmExitApp();
+            } else {
+              this.showedAlert = false;
+              this.confirmAlert.dismiss();
+            }
+          }
+          if (this.nav.canGoBack()) {
+            this.nav.pop();
+          }
+  
+        });
     });
   }
 
@@ -96,7 +130,7 @@ export class MyApp {
         
         break;
         case 'Log Out':
-        localStorage.clear();
+        localStorage.removeItem('user');
         this.menuCtrl.swipeEnable(false, 'menu1');
         this.nav.setRoot('LoginPage');
         break;
@@ -128,5 +162,30 @@ export class MyApp {
           this.profilepic = (this.user['img']) ? this.domSanitizer.bypassSecurityTrustResourceUrl(this.user['img']) : "assets/imgs/ic_profile_dp1.jpg";
        }
   }
+
+
+    // confirmation pop up to exit from app 
+    confirmExitApp() {
+      this.showedAlert = true;
+      this.confirmAlert = this.alertCtrl.create({
+        subTitle: "Do you want to exit from the app?",
+        buttons: [
+          {
+            text: 'NO',
+            handler: () => {
+              this.showedAlert = false;
+              return;
+            }
+          },
+          {
+            text: 'YES',
+            handler: () => {
+              this.platform.exitApp();
+            }
+          }
+        ]
+      });
+      this.confirmAlert.present();
+    }
 }
 

@@ -21,6 +21,7 @@ import { ImageSelectorProvider } from '../providers/image-selector/image-selecto
 import { ApiProvider } from '../providers/api/api';
 import { Network } from '@ionic-native/network';
 import { ToastProvider } from '../providers/toast/toast';
+import { CallNumber } from '@ionic-native/call-number';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ToastProvider } from '../providers/toast/toast';
     Camera,
     File,
     Network,
+    CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SmsServiceProvider,
     LoaderServiceProvider,

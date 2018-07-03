@@ -17,6 +17,41 @@ export class SmsServiceProvider {
     console.log('Hello SmsServiceProvider Provider');
 }
 
+getfollow(id:any): Promise<any>
+  {
+    return new Promise((resolve, reject) => {
+    this.loader.Show("Loading...");
+     this.api.auth('follow_discussion', {
+      'discussion_id':id
+    }).subscribe(res => {
+       console.log('follow_discussion',res);
+       this.loader.Hide();
+       if(res.authorization)
+       {
+         resolve(res);
+       }
+       else{
+        this.toastProvider.NotifyWithoutButton({
+          message: res.message, 
+          duration: 3000,
+          position: 'top'
+        });
+        reject({});
+      }
+       
+    }, err => {
+      this.loader.Hide();
+      console.log('getProfession err',err);
+      this.toastProvider.NotifyWithoutButton({
+        message: err.message, 
+        duration: 3000,
+        position: 'top'
+      });
+      reject({});
+     });
+    })
+  }
+
 getlike(id:any): Promise<any>
   {
     return new Promise((resolve, reject) => {

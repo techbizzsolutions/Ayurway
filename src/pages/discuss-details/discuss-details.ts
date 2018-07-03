@@ -64,6 +64,24 @@ export class DiscussDetailsPage {
     });
   }
 
+  follow(item)
+  {
+    console.log(item);
+     this.msg.getfollow(item.id).then(res=>{
+         console.log('getfollow',res);
+          if(res.status == "Success")
+          {
+            this.toastProvider.NotifyWithoutButton({
+              message: res.message, 
+              duration: 3000,
+              position: 'top'
+            });
+            this.discuss.is_followed = "yes";
+          }
+     })
+     .catch(err=>{})  
+  }
+
   otherProfile()
   {
     this.navCtrl.push('OtherProfilePage');
@@ -74,17 +92,29 @@ export class DiscussDetailsPage {
     this.scrollToBottom();
   }
 
-  shareData(item,index)
+  bookmark(item,index)
   {
-     this.loader.Show("downloading image...");
+    this.msg.getshare(item.id).then(res=>{
+      console.log('getshare',res);
+      if(res && res.status ==="Success")
+        {
+         this.toastProvider.NotifyWithoutButton({
+           message: "Bookmark has been added successfully", 
+           duration: 3000,
+           position: 'top'
+         });
+         this.discuss[index].shares = parseInt(this.discuss[index].shares) + 1;
+        }
+      })
+      .catch(err=>{})
+  }
+  
+  shareData(item)
+  {
+      this.loader.Show("downloading image...");
      this.imgselect.shareData(item.content,"item.image")
      .then(res=>{
       this.loader.Hide();
-      this.msg.getshare(item.discussion_id).then(res=>{
-        console.log('getshare',res);
-        this.discuss.shares = parseInt(this.discuss.shares) + 1;
-    })
-    .catch(err=>{})
     }).catch(err=>{
       this.loader.Hide();
     });

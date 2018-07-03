@@ -18,6 +18,9 @@ page-discuss {
             height: 80px;
             stroke: color($colors, primary) !important;
             fill: color($colors, primary) !important;
-            }
+        }
+    }
+    .button-small-md {
+        font-size: 1rem !important;
     }
 }

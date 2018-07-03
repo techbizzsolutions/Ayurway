@@ -7,29 +7,27 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card *ngIf="profiledata">
         <ion-card-content>
             <ion-item>
                 <ion-thumbnail item-start>
                     <div class="outerdiv">
                         <div class="setclircle">
-                            <img class="bigimg" [src]='profilePic'>
+                            <img class="bigimg" [src]='profiledata.image'>
                         </div>
                     </div>
                 </ion-thumbnail>
-                <h2> Dr. <strong>Raj  </strong><strong>Kumar </strong></h2>
-                <p>Veterinary</p>
-                <p>Delhi</p>
+                <h2> Dr. <strong>{{profiledata.first_name}}  </strong><strong>{{profiledata.last_name}}  </strong></h2>
+                <p>{{profiledata.profession}}</p>
+                <p>{{profiledata.city}}</p>
             </ion-item>
         </ion-card-content>
         <ion-row>
             <ion-col col-6>
-                <a href="tel:8523882090">
-                    <button ion-button item-end block icon-left>
+                <button ion-button (click)="call(profiledata.phone)" item-end block icon-left>
                 <ion-icon name="md-call"></ion-icon>
-                Call 
-            </button>
-                </a>
+                    Call {{profiledata.phone}}
+               </button>
             </ion-col>
             <ion-col col-6>
                 <button ion-button item-end block icon-left>
@@ -40,35 +38,35 @@
         </ion-row>
     </ion-card>
     <hr>
-    <ion-row class="socialinfo">
+    <ion-row class="socialinfo" *ngIf="profiledata">
         <ion-col col-3>
             <div>
-                <p>128</p>
+                <p>{{profiledata.followers}}</p>
                 <p>Followers</p>
             </div>
         </ion-col>
         <ion-col col-3>
             <div>
-                <p>18</p>
+                <p>{{profiledata.following}}</p>
                 <p>Followings</p>
             </div>
         </ion-col>
         <ion-col col-3>
             <div>
-                <p>12</p>
+                <p>{{profiledata.cases}}</p>
                 <p>Cases</p>
             </div>
         </ion-col>
         <ion-col col-3>
             <div>
-                <p>28</p>
+                <p>{{profiledata.answers}}</p>
                 <p>Answers</p>
             </div>
         </ion-col>
     </ion-row>
 
     <hr>
-    <ion-card>
+    <ion-card *ngIf="profiledata">
         <ion-card-content>
             <ion-list>
                 <ion-item-divider color="light" class="dividerpadding">
@@ -76,70 +74,91 @@
                 </ion-item-divider>
                 <ion-item>
                     <h6>Email </h6>
-                    <p class="title">ajaysaini95700@gmail.com</p>
+                    <p class="title">{{profiledata.email}}</p>
                 </ion-item>
                 <ion-item>
                     <h6>Summary </h6>
-                    <p style="white-space: normal !important;" class="title">I am a proffesional doctor in delhi</p>
+                    <p style="white-space: normal !important;" class="title">{{profiledata.about_doctor}}</p>
                 </ion-item>
                 <ion-item>
                     <h6>Membership </h6>
-                    <p class="title">ABC</p>
+                    <p *ngFor="let item of profiledata.membership;" class="title">{{item.membership}}</p>
                 </ion-item>
                 <ion-item>
                     <h6>Experience </h6>
-                    <p class="title">ABC Hospital</p>
-                    <p class="subtitle">Doctor</p>
-                    <p class="subtitle">11-12-2001 to 10-12-2016</p>
-                    <p class="subtitle">Meerut india</p>
-                    <p style="white-space: normal !important;" class="subtitle"> Soloved cases</p>
+                    <div *ngFor="let item of profiledata.experience;">
+                        <p class="title">{{item.hospital}}</p>
+                        <p class="subtitle">{{item.designation}}</p>
+                        <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
+                        <p class="subtitle">{{item.city}} <span> {{item.country}}</span></p>
+                        <p style="white-space: normal !important;" class="subtitle"> {{item.description}}</p>
+                    </div>
                 </ion-item>
                 <ion-item>
                     <h6>Education </h6>
-                    <p class="title">ABC institute</p>
-                    <p class="subtitle">MCA</p>
-                    <p class="subtitle">11-12-2001 to 10-12-2016</p>
-                    <p class="subtitle">Meerut india</p>
+                    <div *ngFor="let item of profiledata.education;">
+                        <p class="title">{{item.institute}}</p>
+                        <p class="subtitle">{{item.degree}}</p>
+                        <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
+                        <p class="subtitle">{{item.city}} <span> {{item.country}}</span></p>
+                    </div>
+
                 </ion-item>
                 <ion-item>
                     <h6>Awards & Honors </h6>
-                    <p class="title">ABC Award</p>
-                    <p style="white-space: normal !important;" class="subtitle">Best performer</p>
+                    <div *ngFor="let item of profiledata.awards;">
+                        <p class="title">{{item.award}}</p>
+                        <p style="white-space: normal !important;" class="subtitle">{{item.description}}</p>
+                    </div>
                 </ion-item>
                 <ion-item>
                     <h6>Publication </h6>
-                    <p class="title">ABC name</p>
-                    <p class="subtitle">1234</p>
-                    <p class="subtitle">ajay</p>
-                    <p class="subtitle">N/A</p>
+                    <div *ngFor="let item of profiledata.publications;">
+                        <p class="title">{{item.paper}}</p>
+                        <p class="subtitle">{{item.author}}</p>
+                        <p class="subtitle">{{item.description}}</p>
+                        <p class="subtitle">{{item.link}}</p>
+                    </div>
                 </ion-item>
                 <ion-item>
                     <h6>Presentation </h6>
-                    <p class="title">Nirpha</p>
-                    <p style="white-space: normal !important;" class="subtitle">how to hanlde serious cases</p>
-                    <p class="subtitle">N/A</p>
+                    <div *ngFor="let item of profiledata.presentations;">
+                        <p class="title">{{item.title}}</p>
+                        <p style="white-space: normal !important;" class="subtitle">{{item.description}}</p>
+                        <p class="subtitle">{{item.link}}</p>
+                    </div>
                 </ion-item>
                 <ion-item>
                     <h6>Volunteer Experience </h6>
-                    <p class="title">Nirpha</p>
-                    <p class="subtitle">Meerut</p>
-                    <p class="subtitle">12-12-2001</p>
+                    <div *ngFor="let item of profiledata.volunteer_experience;">
+                        <p class="title">{{item.title}}</p>
+                        <p class="subtitle">{{item.location}}</p>
+                        <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
+                    </div>
                 </ion-item>
                 <ion-item>
                     <h6>Certification & Courses </h6>
-                    <p class="title">MBBS</p>
-                    <p class="subtitle">shobhit university Meerut</p>
-                    <p class="subtitle">12-12-2001 to 11-12-2012</p>
+                    <div *ngFor="let item of profiledata.certifications;">
+                        <p class="title">{{item.title}}</p>
+                        <p class="subtitle">{{item.institute}}</p>
+                        <p class="subtitle">{{item.date_from}} to <span *ngIf="(item.is_currently == '0')"> {{item.date_to}}</span><span *ngIf="!(item.is_currently == '0')">Persent</span></p>
+
+                    </div>
+
                 </ion-item>
                 <ion-item>
                     <h6>CME's </h6>
-                    <p class="title">ABC</p>
-                    <p class="subtitle">Meerut</p>
-                    <p class="subtitle">21-11-2001</p>
+                    <div *ngFor="let item of profiledata.cmes;">
+                        <p class="title">{{item.name}}</p>
+                        <p class="subtitle">{{item.location}}</p>
+                        <p class="subtitle">{{item.date_attended}}</p>
+                    </div>
                 </ion-item>
                 <ion-item>
                     <h6>Language </h6>
-                    <p class="title">English</p>
+                    <div *ngFor="let item of profiledata.languages;">
+                        <p class="title">{{item.language}}</p>
+                    </div>
                 </ion-item>
             </ion-list>
         </ion-card-content>

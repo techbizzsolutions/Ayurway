@@ -7,9 +7,9 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
+    <ion-card *ngIf="profiledata">
         <ion-card-content>
-            <ion-item *ngIf="profiledata">
+            <ion-item>
                 <ion-thumbnail item-start>
                     <div class="outerdiv" (click)="changePic()">
                         <div class="setclircle">
@@ -60,9 +60,9 @@
     </ion-row>
 
     <hr>
-    <ion-card>
+    <ion-card *ngIf="profiledata">
         <ion-card-content>
-            <ion-list *ngIf="profiledata">
+            <ion-list>
                 <ion-item-divider color="light" class="dividerpadding">
                     <h6>Basic Info </h6>
                 </ion-item-divider>

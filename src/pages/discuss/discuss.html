@@ -1,7 +1,7 @@
 <ion-content>
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-                <ion-refresher-content></ion-refresher-content>
-              </ion-refresher>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-card>
         <ion-card-content>
             <ion-item>
@@ -25,8 +25,8 @@
     </div>
     <h5 *ngIf="!discusses.length">No Data Found</h5>
     <ion-card *ngFor="let discuss of discusses; let i = index">
-        <ion-item >
-            <ion-avatar item-start (click)="otherProfile()">
+        <ion-item>
+            <ion-avatar item-start (click)="otherProfile(discuss)">
                 <img [src]="discuss.doctor_image">
             </ion-avatar>
             <div (click)="otherProfile()">
@@ -35,7 +35,7 @@
                 <p>{{discuss.added_date}}</p>
             </div>
 
-            <button ion-button item-end icon-left>
+            <button *ngIf="discuss.is_followed" (click)="follow(discuss)" ion-button item-end icon-left small>
                 <ion-icon name="md-person-add"></ion-icon>
                 Follow
             </button>
@@ -48,22 +48,27 @@
             </ion-card-content>
         </div>
         <ion-row>
-            <ion-col col-4 class="aligncenter" (click)="like(discuss,i)">
+            <ion-col col-3 class="aligncenter" (click)="like(discuss,i)">
                 <button ion-button icon-left clear small>
                 <ion-icon name="thumbs-up"></ion-icon>
                 <div>{{discuss.likes}} Likes</div>
                 </button>
             </ion-col>
-            <ion-col col-4 class="aligncenter">
+            <ion-col col-3 class="aligncenter">
                 <button (click)="itemClick(discuss)" ion-button icon-left clear small>
                 <ion-icon name="text"></ion-icon>
                 <div>{{discuss.answers}} Answers</div>
                 </button>
             </ion-col>
-            <ion-col col-4 (click)="shareData(discuss,i)" class="aligncenter">
+            <ion-col col-4 (click)="bookmark(discuss,i)" class="aligncenter">
+                <button ion-button icon-left clear small>
+                <ion-icon name="md-bookmark"></ion-icon>
+                <div>{{discuss.shares}} Bookmark</div>
+                </button>
+            </ion-col>
+            <ion-col col-2 (click)="shareData(discuss)" class="aligncenter">
                 <button ion-button icon-left clear small>
                 <ion-icon name="md-share"></ion-icon>
-                <div>{{discuss.shares}} Shares</div>
                 </button>
             </ion-col>
         </ion-row>
