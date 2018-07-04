@@ -13,7 +13,8 @@
                 <ion-thumbnail item-start>
                     <div class="outerdiv">
                         <div class="setclircle">
-                            <img class="bigimg" [src]='profiledata.image'>
+                            <img *ngIf="profiledata.image" class="bigimg" [src]='profiledata.image'>
+                            <img *ngIf="!profiledata.image" class="bigimg" src="assets/imgs/ic_profile_dp1.jpg" alt="">
                         </div>
                     </div>
                 </ion-thumbnail>

@@ -2,7 +2,6 @@ import { Component,ViewChild } from '@angular/core';
 import { Nav, Platform, Events, MenuController, AlertController, IonicApp } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ImageSelectorProvider } from '../providers/image-selector/image-selector';
 

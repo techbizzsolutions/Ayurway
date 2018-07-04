@@ -99,7 +99,6 @@ export class ProfilePage {
       .then(entry => (<FileEntry>entry).file(file => {
         console.log('file', file);
         let bytes = file.size;
-        let val;
         if (bytes < 10485760) {
           console.log("Size = " + bytes);
           this.uploadOnServer(imageURI);

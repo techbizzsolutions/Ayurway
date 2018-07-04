@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastProvider } from '../../providers/toast/toast';
-import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
@@ -17,7 +16,6 @@ export class JournalsPage {
   isshow:boolean = true;
   constructor(public navCtrl: NavController,
     public api: ApiProvider,
-    private loader: LoaderServiceProvider,
     public toastProvider: ToastProvider, public navParams: NavParams) {
     this.rootNavCtrl = this.navParams.get('rootNavCtrl');
   }

@@ -20,7 +20,8 @@
     <ion-card *ngFor="let discuss of discusses; let i = index">
         <ion-item>
             <ion-avatar item-start (click)="otherProfile(discuss)">
-                <img [src]="discuss.doctor_image">
+                <img *ngIf="discuss.doctor_image" [src]="discuss.doctor_image">
+                <img *ngIf="!discuss.doctor_image" src="assets/imgs/ic_profile_dp1.jpg" alt="">
             </ion-avatar>
             <div (click)="otherProfile(discuss)">
                 <h2>{{discuss.doctor_name}}</h2>
@@ -34,7 +35,7 @@
                 </button>
         </ion-item>
         <div (click)="itemClick(discuss)">
-            <img [src]="discuss.image">
+            <img *ngIf="discuss.image" style="height: 200px !important;" [src]="discuss.image">
             <ion-card-content>
                 <p>{{discuss.content}}</p>
             </ion-card-content>

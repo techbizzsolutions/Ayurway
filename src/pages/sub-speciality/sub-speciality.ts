@@ -21,12 +21,10 @@ export class SubSpecialityPage {
 
   done()
   {
-    var check = false;
     var arry = [];
     this.subSpeciality.forEach(element => {
         if(element.selected)
         {
-          check = true;
           arry.push(element.id);
         }
 

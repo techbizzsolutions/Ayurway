@@ -10,7 +10,9 @@
     <ion-card *ngIf="discuss">
         <ion-item>
             <ion-avatar item-start (click)="otherProfile()">
-                <img [src]="discuss.doctor_image">
+                <img *ngIf="discuss.doctor_image" [src]="discuss.doctor_image">
+                <img *ngIf="!discuss.doctor_image" src="assets/imgs/ic_profile_dp1.jpg" alt="">
+
             </ion-avatar>
             <div (click)="otherProfile()">
                 <h2>{{discuss.doctor_name}}</h2>
@@ -24,8 +26,7 @@
             </button>
         </ion-item>
         <div (click)="itemClick(discuss)">
-            <img [src]="discuss.image">
-
+            <img *ngIf="discuss.image" style="height: 200px !important;" [src]="discuss.image">
             <ion-card-content>
                 <p>{{discuss.content}}</p>
             </ion-card-content>
@@ -54,7 +55,8 @@
     <div class="message-wrap">
 
         <div *ngFor="let msg of msgList" class="message" [class.left]=true>
-            <img class="user-img" [src]="msg.answer_doctor_image" alt="" src="">
+            <img *ngIf="msg.answer_doctor_image" class="user-img" [src]="msg.answer_doctor_image" alt="">
+            <img *ngIf="!msg.answer_doctor_image" class="user-img" src="assets/imgs/ic_profile_dp1.jpg" alt="">
             <div class="msg-detail">
                 <div class="msg-info">
                     <p>
