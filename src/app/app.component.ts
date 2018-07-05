@@ -53,6 +53,10 @@ export class MyApp {
           icon: 'md-person'
         },
         {
+          title: 'Pay Now',
+          icon: 'cash'
+        },
+        {
           title: 'Rate Us',
           icon: 'md-star'
         },
@@ -126,7 +130,9 @@ export class MyApp {
         this.shareApp();
         break;
         case 'Contact Us':
-        
+        break;
+        case 'Pay Now':
+        window.open('https://imjo.in/vTSsKw','_blank');
         break;
         case 'Log Out':
         localStorage.removeItem('user');
