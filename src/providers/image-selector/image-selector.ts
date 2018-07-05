@@ -51,7 +51,7 @@ export class ImageSelectorProvider {
   shareData(msg:any,image:any):Promise<any> 
   {
     // Check if sharing via email is supported
-    return this.socialSharing.share(msg, null,image, 'https://play.google.com/store/apps/details?id=com.technotwit.lowprotector').then(() => {
+    return this.socialSharing.share(msg, null,image, 'https://play.google.com/store/apps/details?id=com.technotwit.ayurway').then(() => {
       return true;
     }, error => {
       return false;
@@ -63,7 +63,7 @@ export class ImageSelectorProvider {
   shareApp(msg:any)
   {
     // Check if sharing via email is supported
-    this.socialSharing.share(msg, null, null, 'https://play.google.com/store/apps/details?id=com.technotwit.lowprotector').then(() => {
+    this.socialSharing.share(msg, null, null, 'https://play.google.com/store/apps/details?id=com.technotwit.ayurway').then(() => {
       // Sharing via email is possible
     }).catch(() => {
       // Sharing via email is not possible

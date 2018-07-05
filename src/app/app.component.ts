@@ -66,6 +66,7 @@ export class MyApp {
         },
         {
           title: 'Contact Us',
+          component: 'ContactPage',
           icon: 'md-contact'
         },
         {
@@ -130,6 +131,7 @@ export class MyApp {
         this.shareApp();
         break;
         case 'Contact Us':
+        this.nav.push(page.component);
         break;
         case 'Pay Now':
         window.open('https://imjo.in/vTSsKw','_blank');
@@ -148,12 +150,12 @@ export class MyApp {
 
   shareApp()
   {
-    this.imgselect.shareApp("Law Protectors App is mainly for Their Customers who wants to register their Trademark, Copyright Application. Through this app They can easily fill up the form details and submit to the Company Authorized Representative.");
+    this.imgselect.shareApp("Ayurway is a medical app exclusively for the doctors. It is a platform for doctors to collaborate on clinical cases and to stay updated with the latest medical news and updates in the industry. It also helps the doctors to access the latest journals, medical guidelines. Also doctors and students alike get to access Job Post in their field.");
   }
 
   rateUs()
   {
-    window.open("https://play.google.com/store/apps/details?id=com.technotwit.lowprotector", '_system');
+    window.open("https://play.google.com/store/apps/details?id=com.technotwit.ayurway", '_system');
   }
 
   setUser() {
