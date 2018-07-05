@@ -19,21 +19,21 @@
             <p item-end>{{item.added_date}}</p>
         </ion-item>
         <ion-card-content>
-            <p>{{item.content}}</p>
+            <p style="text-align: justify !important;">{{item.content}}</p>
         </ion-card-content>
         <img [src]="item.image">
         <ion-row>
             <ion-col col-6 class="aligncenter">
                 <button ion-button icon-left block (click)="apply(item)">
-                            <ion-icon name="md-checkmark"></ion-icon>
-                            <div>Apply</div>
-                          </button>
+          <ion-icon name="md-checkmark"></ion-icon>
+          <div>Apply</div>
+        </button>
             </ion-col>
             <ion-col col-6 (click)="shareData(item)" class="aligncenter">
                 <button ion-button icon-left block>
-                            <ion-icon name="md-share"></ion-icon>
-                            <div>Shares</div>
-                            </button>
+          <ion-icon name="md-share"></ion-icon>
+          <div>Shares</div>
+        </button>
             </ion-col>
         </ion-row>
 

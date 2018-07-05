@@ -1,19 +1,19 @@
 <ion-header>
-        <ion-navbar color="primary">
-            <ion-title>
-                Ayurway
-            </ion-title>
-        </ion-navbar>
-    </ion-header>
-    
-    <ion-content padding>
-        <div *ngIf="news">
-                <h2>{{news.title}}</h2>
-                <p>Post by Admin <span style="float: right;">{{news.added_date}}</span></p>
-                <img style="width: 100%;" [src]="news.image">
-                <div>
-                    {{news.content}}
-                </div>
+    <ion-navbar color="primary">
+        <ion-title>
+            Ayurway
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div *ngIf="news">
+        <h2>{{news.title}}</h2>
+        <p>Post by Admin <span style="float: right;">{{news.added_date}}</span></p>
+        <img style="width: 100%;" [src]="news.image">
+        <div style="text-align: justify !important;">
+            {{news.content}}
         </div>
-    
-    </ion-content>
+    </div>
+
+</ion-content>
