@@ -13,6 +13,10 @@ page-discuss {
         .spinner-md-crescent circle {
             stroke: color($colors, primary) !important;
         }
+        ion-spinner {
+            width: 80px !important;
+            height: 80px !important;
+        }
         .spinner svg {
             width: 80px;
             height: 80px;
